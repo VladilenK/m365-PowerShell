@@ -64,14 +64,4 @@ foreach ($modernPage in $items) {
 $SiteModernPages.count
 
 $page = Get-PnPClientSidePage -Identity home.aspx
-$pag }
-}
 $SiteModernPages.count
-
-$page = Get-PnPClientSidePage -Identity home.aspx
-$pag e
-e
-$SiteModernPages.count
-
-$page = Get-PnPClientSidePage -Identity home.aspx
-$page.Controls.Controls.Controls
