@@ -15,33 +15,38 @@ foreach ($siteUrl in $sites.Url) {
     $webs = Get-PnPSubWebs -Connection $siteConnection -IncludeRootWeb -includes WelcomePage
     foreach ($web in $webs) {
         $sitePagesList = Get-PnPList -Connection $siteConnection -Identity "SitePages"
-        $pages = Get-PnPListItem -Connection $siteConnection -List $sitePagesList
+        $listContentTypes = Get-PnPContentType -List $sitePagesList -Connection $siteConnection
+        $cType = $listContentTypes | Where-Object { $_.Name -eq 'Site Page' };
+        $queryString = "<View><Query><Where><Eq><FieldRef Name='ContentTypeId'/><Value Type='Text'>" + $cType.Id.StringValue + "</Value></Eq></Where></Query></View>"  
+        $pages = Get-PnPListItem -List $sitePagesList -Query $queryString -Connection $siteConnection 
         Write-Host "Web Url:" $web.Url
-        Write-Host " pages:" $pages.count
+        #Write-Host " pages:" $pages.count
         # $batch = New-PnPBatch -Connection $siteConnection
         # $pages | ForEach-Object { Set-PnPListItem -Connection $siteConnection -List $sitePagesList -Identity $_.Id -Batch $batch -Values @{"CommentsDisabled" = $true } }
         # Invoke-PnPBatch -Batch $batch
         foreach ($pageId in $pages.Id) {
-            $page = Get-PnPListItem -Connection $siteConnection -List $sitePagesList -Id $pageId -Fields ID, Title, DisplayName, BannerImageUrl, FileRef, CommentsDisabled, CommentsDisabledScope, FileLeafRef
+            $page = Get-PnPListItem -Connection $siteConnection -List $sitePagesList -Id $pageId -Fields ID, Title, DisplayName, Client_Title, BannerImageUrl, FileRef, CommentsDisabled, CommentsDisabledScope, FileLeafRef
             $pageFileName = $page["FileLeafRef"]
             $PageUrl = "$($siteUrl)/SitePages/$pageFileName"
             if ($web.WelcomePage -match $pageFileName) {
                 $IsHomePage = $true
             }
             $pageObject = [PSCustomObject]@{
-                Site                  = $siteUrl; 
-                Web                   = $web.Url; 
-                PageUrl               = $PageUrl;
-                IsHomePage            = $IsHomePage;
-                PageTitle             = $page["Title"]; 
-                CommentsDisabled      = $page.CommentsDisabled;
-                CommentsDisabledScope = $page.CommentsDisabledScope;
+                Site                  = $siteUrl
+                Web                   = $web.Url 
+                PageUrl               = $PageUrl
+                IsHomePage            = $IsHomePage
+                PageTitle             = $page["Title"]
+                PageDisplayName       = $page.DisplayName
+                PageClientTitle       = $page.Client_Title
+                CommentsDisabled      = $page.CommentsDisabled
+                CommentsDisabledScope = $page.CommentsDisabledScope
             }
             $pagesReport += $pageObject
         }
     }
 }
-#$pagesReport | Select-Object -last 3 | fl
+$pagesReport | Select-Object -last 3 | fl
 $pagesReport | Select-Object -last 16 | ft -a PageUrl, PageTitle, CommentsDisabled
 
 
