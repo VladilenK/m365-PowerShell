@@ -12,12 +12,10 @@ $token = ($tokenRequest.Content | ConvertFrom-Json).access_token
 # Base URL
 $headers = @{Authorization = "Bearer $token" }
 
-
 Write-Host "Fetching Teams user activity data from the Graph..."
 $ReportURI = "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityDetail(period='D7')"
 $Report = (Invoke-RestMethod -Uri $ReportURI -Headers $Headers -Method Get -ContentType "application/json") -Replace "...Report Refresh Date", "Report Refresh Date" | ConvertFrom-Csv 
 $Report | export-csv -Path "$Home/OneDrive - jvkdev/Desktop/tmp/getYammerGroupsActivityDetail.csv"
-
 
 return
 # original:
