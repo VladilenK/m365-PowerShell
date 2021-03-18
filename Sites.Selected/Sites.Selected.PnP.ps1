@@ -13,9 +13,18 @@ Revoke-PnPAzureADAppSitePermission -Connection $adminConnection -Site $sitePath 
 
 $clientConnection = Connect-PnPOnline -Url $sitePath -ClientId $clientAppId -CertificateBase64Encoded $secretPlainText -Tenant $tenantName  -Verbose -ReturnConnection
 $clientConnection.Url
-Get-PnPTenantSite -Connection $clientConnection
-Get-PnPSite -Connection $clientConnection 
-Get-PnPList -Connection $clientConnection 
+# Get-PnPTenantSite -Connection $clientConnection
+# Get-PnPSite -Connection $clientConnection 
+# Get-PnPWeb -Connection $clientConnection 
+# Get-PnPList -Connection $clientConnection 
+
+$pnpAccessToken = Get-PnPAccessToken -Connection $clientConnection
+$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $spoResult.id + '/lists?$select=displayName'
+$spoData = Invoke-RestMethod -Headers @{Authorization = "Bearer $($pnpAccessToken)" } -Uri $apiUrl -Method Get -ContentType "text/plain" -ResponseHeadersVariable spoRespHeaders
+$spoData.Value | FT
+
+
+
 
 
 
