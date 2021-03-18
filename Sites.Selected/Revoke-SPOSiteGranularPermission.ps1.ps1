@@ -10,10 +10,10 @@
 #Site url 
 # $sitePath = ""
 #Leave this empty to delete all granular perms or provide specific app id
-$clientAppId = "" #Example: "986f9573-cfcc-4444-b86a-99f9997c3edc"
+#$clientAppId = "" #Example: "986f9573-cfcc-4444-b86a-99f9997c3edc"
 #$clientAppId = "6cea34ae-ee32-4283-882e-0b2618a8c3bb"
 
-$siteName = $sitePath.Split("/")[4]
+$siteName = $sitePath.Split("/")[3] + '/' + $sitePath.Split("/")[4]
 
 $resource = "https://graph.microsoft.com/"
 $ReqTokenBody = @{
@@ -24,7 +24,7 @@ $ReqTokenBody = @{
 } 
 $TokenResponse = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$TenantName/oauth2/v2.0/token" -Method POST -Body $ReqTokenBody
 
-$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $tenantDomain + ':/sites/' + $siteName + '?$select=id,displayName'
+$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $tenantDomain + ':/' + $siteName + '?$select=id,displayName'
 try {
     $spoResult = Invoke-RestMethod -Headers @{Authorization = "Bearer $($Tokenresponse.access_token)" } -Uri  $apiUrl -Method Get 
     Write-Host "Site:" $spoResult.displayName

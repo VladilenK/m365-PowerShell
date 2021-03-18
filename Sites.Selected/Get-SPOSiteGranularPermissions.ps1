@@ -3,7 +3,7 @@
 
 #Provide site url
 # $sitePath = ""
-$siteName = $sitePath.Split("/")[4]
+$siteName = $sitePath.Split("/")[3] + '/' + $sitePath.Split("/")[4]
 
 $ReqTokenBody = @{
   Grant_Type    = "client_credentials"
@@ -13,7 +13,7 @@ $ReqTokenBody = @{
 } 
 $TokenResponse = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$TenantName/oauth2/v2.0/token" -Method POST -Body $ReqTokenBody
 
-$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $tenantDomain + ':/sites/' + $siteName + '?$select=id,displayName'
+$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $tenantDomain + ':/' + $siteName + '?$select=id,displayName'
 try {
   $spoResult = Invoke-RestMethod -Headers @{Authorization = "Bearer $($Tokenresponse.access_token)" } -Uri  $apiUrl -Method Get 
   Write-Host "Site:" $spoResult.displayName
@@ -34,7 +34,8 @@ try {
     Write-Host "No site level permissions found"
   }
   else {
-    $spoData.value | % { $_ | ConvertTo-Json -Depth 10 }
+    $permissions = $spoData.value | ForEach-Object { $_ | ConvertTo-Json -Depth 10 }
+    $permissions 
   }
 }
 catch {

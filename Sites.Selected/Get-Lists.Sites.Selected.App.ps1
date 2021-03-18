@@ -7,7 +7,7 @@ clear
 # $tenantDomain = $tenantPrefix +".sharepoint.com";
 
 #$sitePath = ""
-$siteName = $sitePath.Split("/")[4]
+$siteName = $sitePath.Split("/")[3] + '/' + $sitePath.Split("/")[4]
 
 $resource = "https://graph.microsoft.com/"
 $ReqTokenBody = @{
@@ -27,7 +27,7 @@ catch {
     Exit 
 }
 
-$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $tenantDomain + ':/sites/' + $siteName + '?$select=id,displayName'
+$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $tenantDomain + ':/' + $siteName + '?$select=id,displayName'
 try {
     $spoResult = Invoke-RestMethod -Headers @{Authorization = "Bearer $($Tokenresponse.access_token)" } -Uri  $apiUrl -Method Get 
     Write-Host "Site: " $spoResult.displayName
