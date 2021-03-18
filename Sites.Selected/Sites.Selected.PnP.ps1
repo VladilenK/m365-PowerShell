@@ -18,7 +18,10 @@ $clientConnection.Url
 # Get-PnPWeb -Connection $clientConnection 
 # Get-PnPList -Connection $clientConnection 
 
+$siteName = $sitePath.Split("/")[3] + '/' + $sitePath.Split("/")[4]
 $pnpAccessToken = Get-PnPAccessToken -Connection $clientConnection
+$apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $tenantDomain + ':/' + $siteName + '?$select=id,displayName'
+$spoResult = Invoke-RestMethod -Headers @{Authorization = "Bearer $($Tokenresponse.access_token)" } -Uri  $apiUrl -Method Get 
 $apiUrl = 'https://graph.microsoft.com/v1.0/sites/' + $spoResult.id + '/lists?$select=displayName'
 $spoData = Invoke-RestMethod -Headers @{Authorization = "Bearer $($pnpAccessToken)" } -Uri $apiUrl -Method Get -ContentType "text/plain" -ResponseHeadersVariable spoRespHeaders
 $spoData.Value | FT
