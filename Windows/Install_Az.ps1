@@ -1,15 +1,34 @@
-﻿
-Get-InstalledModule -Name Az 
+﻿Get-InstalledModule -Name Az 
 Get-InstalledModule -Name Az -AllVersions | Select-Object -Property Name, Version
+Get-Module Az 
 Get-Module Az -ListAvailable 
 Find-Module Az
 
 Install-Module -Name Az -AllowClobber -Scope CurrentUser
 
-Import-Module Az
+Import-Module Az -RequiredVersion 5.7.0
 
 Remove-Module Az
 Update-Module Az
+
+# Az.Account
+Get-InstalledModule -Name Az.Account 
+Get-InstalledModule -Name Az -AllVersions | Select-Object -Property Name, Version
+Get-Module Az.Account  
+Get-Module Az.Account  -ListAvailable 
+Find-Module Az
+
+Install-Module -Name Az.Account -AllowClobber # -Scope CurrentUser
+
+Import-Module Az -RequiredVersion 5.7.0
+
+Remove-Module Az
+Update-Module Az.Account
+
+
+
+
+
 
 # Connect to Azure with a browser sign in token
 Connect-AzAccount -Subscription ""
@@ -35,4 +54,12 @@ Import-Module -Name PackageManagement -MinimumVersion 1.4
 Get-Module -Name AzureRM -ListAvailable
 Remove-Module AzureRM 
 Uninstall-AzureRM 
+
+
+###########################################################################
+# MSAL
+Find-Module MSAL.PS
+Install-Module MSAL.PS
+
+
 
