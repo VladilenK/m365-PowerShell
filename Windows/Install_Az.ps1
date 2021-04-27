@@ -2,14 +2,23 @@
 Get-InstalledModule -Name Az -AllVersions | Select-Object -Property Name, Version
 Get-Module Az 
 Get-Module Az -ListAvailable 
+Get-Module Az -ListAvailable | ft name, Version, Path 
 Find-Module Az
 
 Install-Module -Name Az -AllowClobber -Scope CurrentUser
+Install-Module -Name Az -AllowClobber -Scope AllUsers 
 
 Import-Module Az -RequiredVersion 5.7.0
 
 Remove-Module Az
-Update-Module Az
+Update-Module Az -Scope CurrentUser
+Update-Module Az -Scope AllUsers 
+
+UnInstall-Module -Name Az -AllVersions 
+UnInstall-Module -Name Az -AllVersions 
+
+Get-InstalledModule -Name Az | Uninstall-Module
+Get-Module Az -ListAvailable | Uninstall-Module
 
 # Az.Account
 Get-InstalledModule -Name Az.Account 
@@ -18,7 +27,7 @@ Get-Module Az.Account
 Get-Module Az.Account  -ListAvailable 
 Find-Module Az
 
-Install-Module -Name Az.Account -AllowClobber # -Scope CurrentUser
+Install-Module -Name Az.Account -AllowClobber -Scope CurrentUser
 
 Import-Module Az -RequiredVersion 5.7.0
 

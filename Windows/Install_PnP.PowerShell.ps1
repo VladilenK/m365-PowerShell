@@ -16,7 +16,7 @@ Uninstall-Module -Name PnP.PowerShell -Force -AllowPrerelease -AllVersions
 Update-Module -Name PnP.PowerShell
 
 Find-Module PnP.PowerShell
-Find-Module PnP.PowerShell | Install-Module -AllowClobber
+Find-Module PnP.PowerShell | Install-Module -AllowClobber -Scope CurrentUser
 
 Find-Module PnP.PowerShell -AllowPrerelease
 Find-Module PnP.PowerShell -AllowPrerelease | Install-Module -AllowClobber

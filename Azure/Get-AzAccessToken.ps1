@@ -12,3 +12,4 @@ $Headers = @{
 # me
 Invoke-RestMethod -Uri 'https://graph.microsoft.com/v1.0/me' -Headers $Headers
 
+
