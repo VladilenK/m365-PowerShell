@@ -3,6 +3,10 @@ Connect-AzAccount -Tenant "046d11d6-08e0-4d20-a743-562836cdcab5"
 # $azAccessToken = Get-AzAccessToken 
 # $azAccessToken = Get-AzAccessToken -Resource "https://graph.windows.net/" 
 $azAccessToken = Get-AzAccessToken -Resource "https://graph.microsoft.com" 
+$azAccessToken
+$azAccessToken = Get-AzAccessToken -Resource "https://uhgdev.sharepoint.com" 
+$azAccessToken
+$tss = $azAccessToken.Token | ConvertTo-SecureString -Force -AsPlainText
 
 # Create header
 $Headers = @{
