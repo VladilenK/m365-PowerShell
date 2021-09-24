@@ -1,12 +1,13 @@
 # PowerShell Script to get alerts from a site collection in SharePoint Online 
+# Prerequisites: Configured Azure App, PnP.PowerShell module 
+#
 # based on Salaudeen Rajack: https://www.sharepointdiary.com/2017/11/sharepoint-online-powershell-to-get-all-alerts-from-site-collection.html
 
 #Config Parameters
-$SiteURL = "https://uhgdev.sharepoint.com/sites/TestCommSite_02"
+$SiteURL = "" # specify site collection Url
 $ReportOutput = "C:\Temp\AlertsRpt.csv"
-# Configure APP ID Credentials to connect
-# $appId = "" # app registerd in Azure with delegated permissions to SharePoint
 
+# $appId = "" # app registerd in Azure with delegated permissions to SharePoint
 
 #Load SharePoint CSOM Assemblies
 Add-Type -Path "C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll"
