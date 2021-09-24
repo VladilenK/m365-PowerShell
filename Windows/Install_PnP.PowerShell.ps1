@@ -29,3 +29,7 @@ Get-Module *PnP*
 
 ###################################################################################################
 return
+
+Update-Module -Name SharePointPnPPowerShellOnline
+
+
