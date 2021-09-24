@@ -1,12 +1,19 @@
 # PowerShell Script to get alerts from a site collection in SharePoint Online 
 # based on Salaudeen Rajack: https://www.sharepointdiary.com/2017/11/sharepoint-online-powershell-to-get-all-alerts-from-site-collection.html
 
+#Config Parameters
+$SiteURL = "https://uhgdev.sharepoint.com/sites/TestCommSite_02"
+$ReportOutput = "C:\Temp\AlertsRpt.csv"
+# Configure APP ID Credentials to connect
+# $appId = "" # app registerd in Azure with delegated permissions to SharePoint
+
+
 #Load SharePoint CSOM Assemblies
 Add-Type -Path "C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll"
 Add-Type -Path "C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll"
     
 Function Get-SPOWebAlerts($SiteURL) {
-    Connect-PnPOnline -ClientId $AppId -Interactive -ReturnConnection -Url $siteUrl # -ForceAuthentication
+    Connect-PnPOnline -ClientId $AppId -Interactive -Url $siteUrl # -ForceAuthentication
     $ctx = Get-PnPContext 
     Try {
         Write-host -f Yellow "Getting Alerts in the site" $SiteURL
@@ -55,16 +62,10 @@ Function Get-SPOWebAlerts($SiteURL) {
         write-host -f Red "Error Getting Alerts!" $_.Exception.Message
     }
 }
- 
-#Config Parameters
-$SiteURL = "https://uhgdev.sharepoint.com/sites/TestCommSite_02"
-$ReportOutput = "C:\Temp\AlertsRpt.csv"
- 
+
 #Delete the Output Report, if exists
 if (Test-Path $ReportOutput) { Remove-Item $ReportOutput }
  
-# Configure APP ID Credentials to connect
-# $appId = "" # app registerd in Azure with delegated permissions to SharePoint
 
 #Call the function
 Get-SPOWebAlerts($SiteURL)
