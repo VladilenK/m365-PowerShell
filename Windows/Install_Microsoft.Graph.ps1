@@ -22,4 +22,3 @@ Update-Module Microsoft.Graph.Identity.DirectoryManagement
 Import-Module Microsoft.Graph.Authentication
 Get-Module Microsoft.Graph.Authentication
 
-

@@ -1,5 +1,11 @@
 Import-Module Microsoft.Graph
 # Connect-MgGraph -Scopes "Application.Read.All"
+
+$allServicePrincipals = Get-MgServicePrincipal -All
+$allServicePrincipals.count
+$allServicePrincipals[0] | fl 
+$allServicePrincipals | ft -a DisplayName, ServicePrincipalType
+
 $legacyServicePrincipals = Get-MgServicePrincipal -Filter { ServicePrincipalType eq 'Legacy' }
 $legacyServicePrincipals.Count
 # remove any principals that don't have KeyCredentials (Workflow, Napa, etc.)
