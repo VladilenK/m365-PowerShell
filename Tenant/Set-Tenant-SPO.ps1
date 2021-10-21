@@ -1,6 +1,8 @@
 ﻿"GlAdmin@uhgdev.onmicrosoft.com" | clip
 Connect-SPOService -Url "https://uhgdev-admin.sharepoint.com" 
 
+Get-SPOTenant
+
 # CDN
 Get-SPOTenantCdnEnabled -CdnType Public
 Get-SPOTenantCdnEnabled -CdnType Private
@@ -16,6 +18,14 @@ Set-SPOTenantCdnEnabled -CdnType Public -Enable $false
 Set-SPOHomeSite -HomeSiteUrl "https://uhgdev.sharepoint.com"
 Get-SPOHomeSite 
 Get-SPOHubSite | ft -a SiteUrl, Title
+
+# Org News Sites
+Get-SPOOrgNewsSite
+Set-SPOOrgNewsSite -OrgNewsSiteUrl <site URL>
+
+# organization assets library
+Get-SPOOrgAssetsLibrary
+Add-SPOOrgAssetsLibrary -LibraryUrl <URL> [-ThumbnailUrl <URL>] [-OrgAssetType <ImageDocumentLibrary or OfficeTemplateLibrary>] [-CdnType <Public or Private>]
 
 # DisableCustomAppAuthentication
 
