@@ -50,7 +50,8 @@ Connect-PnPOnlineAuto -Url $adminUrl
 $sites = Get-PnPTenantSite 
 $sites.count
 
-$url = "https://uhgdev.sharepoint.com/teams/AboutBirdwatching"
+$url = "https://contoso.sharepoint.com/teams/AboutBirdwatching"
+$url = ""
 $siteConnection = Connect-PnPOnlineAuto -Url $Url 
 
 Get-PnPListItem -List "Site Pages" -Query "<View><Query><Where><Eq><FieldRef Name='ContentTypeId'/><Value Type='Text'>0x0101009D1CB255DA76424F860D91F20E6C411800E53BD99D3E0D8545813DF21536D1B228</Value></Eq></Where></Query></View>"  

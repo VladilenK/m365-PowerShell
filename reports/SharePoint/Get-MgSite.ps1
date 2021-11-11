@@ -8,7 +8,7 @@ Get-MgProfile
 Get-MgSite | select -First 1 | fl
 Get-MgSite -All -Sort CreatedDateTime | select WebUrl, CreatedDateTime
 # Get-MgSite -Filter "displayName eq 'Jan'"
-# Get-MgSite -Filter "WebUrl eq 'https://uhgdev.sharepoint.com/teams/janat'"
+# Get-MgSite -Filter "WebUrl eq 'https://contoso.sharepoint.com/teams/janat'"
 # Get-MgSite -Filter "Name eq Jan"
 
 
