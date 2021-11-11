@@ -1,5 +1,4 @@
-﻿"GlAdmin@uhgdev.onmicrosoft.com" | clip
-Connect-SPOService -Url "https://uhgdev-admin.sharepoint.com" 
+﻿Connect-SPOService -Url "" 
 
 Get-SPOTenant
 
@@ -15,7 +14,7 @@ Add-SPOTenantCdnOrigin -CdnType Public -OriginUrl sites/cdn/cdndocs
 Set-SPOTenantCdnEnabled -CdnType Public -Enable $false
 
 # Home Site
-Set-SPOHomeSite -HomeSiteUrl "https://uhgdev.sharepoint.com"
+Set-SPOHomeSite -HomeSiteUrl ""
 Get-SPOHomeSite 
 Get-SPOHubSite | ft -a SiteUrl, Title
 
