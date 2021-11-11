@@ -20,6 +20,7 @@ Uninstall-Module -Name Microsoft.Online.SharePoint.PowerShell -RequiredVersion 1
 #Update-Module -Name Microsoft.Online.SharePoint.PowerShell
 
 Get-Command -Module Microsoft.Online.SharePoint.PowerShell
+Get-Command -Module Microsoft.Online.SharePoint.PowerShell *templ*
 
 # install MSonline
 
