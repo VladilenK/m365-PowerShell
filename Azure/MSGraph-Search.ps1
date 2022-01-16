@@ -1,4 +1,5 @@
 # MSAL
+# JVKdev app with delegated permissions
 $connectionDetails = @{
     'TenantId'    = '046d11d6-08e0-4d20-a743-562836cdcab5'
     'ClientId'    = 'cb3d2f17-f734-4512-b39d-25e0b7472205'
@@ -22,7 +23,7 @@ $body = @"
         "driveItem"
       ],
       "query": {
-        "queryString": "Planet"
+        "queryString": "test"
       }
     }
   ]
