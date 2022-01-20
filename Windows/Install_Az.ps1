@@ -63,6 +63,7 @@ Import-Module -Name PackageManagement -MinimumVersion 1.4
 Get-Module -Name AzureRM -ListAvailable
 Remove-Module AzureRM 
 Uninstall-AzureRM 
+Uninstall-Module AzureRM
 
 
 ###########################################################################
