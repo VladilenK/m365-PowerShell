@@ -12,7 +12,6 @@ $Headers = @{
 }
 Invoke-RestMethod -Uri 'https://graph.microsoft.com/v1.0/me' -Headers $Headers
 
-
 # search
 $apiUrl = "https://graph.microsoft.com/beta/search/query"
 $body = @"
@@ -37,5 +36,13 @@ $res.value[0].hitsContainers[0].hits[0] | fl
 $res.value[0].hitsContainers[0].hits[1] | fl
 
 
+#######################################################################################
+Connect-PnPOnline -ClientId $clientid -Url $url -Interactive -ReturnConnection
+Connect-PnPOnline -AccessToken $token -Url $url -ReturnConnection
+$results = Submit-PnPSearchQuery -Query "Bird*"
+$results.RowCount
+$results.ResultRows[0]
+$results.ResultRows[0].OriginalPath
+$results.ResultRows.OriginalPath
 
 
