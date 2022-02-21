@@ -1,5 +1,6 @@
 #Modify the values for the following variables to configure the audit log search.
 [DateTime]$start = [DateTime]::UtcNow.AddHours(-3)
+[DateTime]$start = [DateTime]::UtcNow.AddDays(-30)
 [DateTime]$end = [DateTime]::UtcNow
 $resultSize = 5000
 
@@ -7,7 +8,7 @@ $results = Search-UnifiedAuditLog -StartDate $start -EndDate $end -ResultSize $r
 $results.Count
 
 
-$freeText = "TestLoggingApp01"
+$freeText = "test"
 $operations = 'Add service principal.'
 $recordType = 'AzureActiveDirectory'
 $results = Search-UnifiedAuditLog -StartDate $start -EndDate $end -ResultSize $resultSize -Formatted -Operations $operations -RecordType $recordType

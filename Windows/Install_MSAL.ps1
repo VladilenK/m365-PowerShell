@@ -11,8 +11,6 @@ Update-Module MSAL.PS -Force
 Uninstall-Module MSAL.PS -AllVersions
 Get-InstalledModule -Name MSAL.PS | Uninstall-Module
 
-
-
 Import-Module MSAL.PS
 
 
