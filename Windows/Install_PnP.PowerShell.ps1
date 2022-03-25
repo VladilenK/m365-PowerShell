@@ -13,7 +13,7 @@ Get-Module -ListAvailable -Name PnP.PowerShell | Uninstall-Module
 Remove-Module -Name PnP.PowerShell -Force
 Uninstall-Module -Name PnP.PowerShell -Force -AllowPrerelease -AllVersions
 
-Update-Module -Name PnP.PowerShell
+Update-Module -Name PnP.PowerShell -Scope CurrentUser -Force
 
 Find-Module PnP.PowerShell
 Find-Module PnP.PowerShell | Install-Module -AllowClobber -Scope CurrentUser
@@ -32,4 +32,4 @@ return
 
 Update-Module -Name SharePointPnPPowerShellOnline
 
-
+Get-Command -Module PnP.PowerShell *search*

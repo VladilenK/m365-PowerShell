@@ -1,6 +1,6 @@
 # This script retrieves new SharePoint Sites
-# Option 1 is based on Microsoft Graph Search API
-# Option 2 is based on Microsoft Graph Sites API
+# Option 1 is based on Microsoft Graph Search API and filtering by "created" property
+# Option 2 is based on Microsoft Graph Sites API and sites search and sorting by "created" property
 # requirements 
 # - PowerShell 7 ( tested with 7.2.1)
 # - MSAL.PS module ( tested with 4.37.0.0)
@@ -59,14 +59,3 @@ $newSites = $res.value | Select-Object createdDateTime, weburl
 $newSites
 # End of Option 2 (Microsoft Graph Sites API)
 
-
-return
-
-$newSites.count
-$newSites.webUrl
-
-$res.value[0].searchTerms
-$res.value[0].hitsContainers[0].hits
-$res.value[0].hitsContainers[0].hits.resource
-$res.value[0].hitsContainers[0].hits[0] | fl
-$res.value[0].hitsContainers[0].hits[1] | fl

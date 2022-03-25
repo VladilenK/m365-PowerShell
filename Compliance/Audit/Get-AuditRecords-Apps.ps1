@@ -1,3 +1,4 @@
+
 #Modify the values for the following variables to configure the audit log search.
 [DateTime]$start = [DateTime]::UtcNow.AddHours(-12)
 [DateTime]$end = [DateTime]::UtcNow
