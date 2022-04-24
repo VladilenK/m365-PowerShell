@@ -9,8 +9,10 @@ Import-Module Microsoft.Graph.Identity.DirectoryManagement
 Get-Module Microsoft.Graph.Identity.DirectoryManagement | ft -a
 Get-Date
 
-$vaultName = "m365-lcnse-alrts-rprtg"
+Get-AzResourceGroup | ft -a
 $rgName = "m365-license-alerts-and-reporting"
+Get-AzKeyVault  -ResourceGroupName $rgName 
+$vaultName = "m365-lcnse-alrts-rprtg"
 $vault = Get-AzKeyVault -VaultName $vaultName -ResourceGroupName $rgName 
 $vault.VaultName
 

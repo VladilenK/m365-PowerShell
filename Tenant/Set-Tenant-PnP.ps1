@@ -1,5 +1,6 @@
 Get-Command -Module PnP.PowerShell *template* 
 Get-PnPTenant | select DisableCustomAppAuthentication, CommentsOnSitePagesDisabled | fl
+Get-PnPTenant | select DisableCustomAppAuthentication
 
 $tenant = Get-PnPTenant 
 $tenant.DisableCustomAppAuthentication
