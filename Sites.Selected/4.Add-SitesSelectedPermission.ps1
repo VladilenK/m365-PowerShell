@@ -7,7 +7,7 @@ $clientAppName
 
 # specify app role
 $roles = @("read") #read, write
-#$roles = @("write") #read, write
+$roles = @("write") #read, write
 
 $rolesJson = ConvertTo-Json $roles
 

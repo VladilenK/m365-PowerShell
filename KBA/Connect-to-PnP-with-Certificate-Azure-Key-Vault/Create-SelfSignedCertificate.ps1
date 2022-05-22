@@ -11,11 +11,6 @@ $filePathPfx = "$Home\code\certificates\cert004.pfx"
 $certPwd = ConvertTo-SecureString -String "12345" -Force -AsPlainText
 Export-PfxCertificate -Cert $cert -FilePath $filePathPfx -Password $certPwd
 
-# ensure you have access to your subscription with Az module:
-Connect-AzAccount -Subscription "" -Tenant "..."
-Get-AzSubscription | fl
-Get-AzContext
-
 # Manually (with GUI): 
 # upload certificate to Azure Key Vault 
 # create an app, add certificate

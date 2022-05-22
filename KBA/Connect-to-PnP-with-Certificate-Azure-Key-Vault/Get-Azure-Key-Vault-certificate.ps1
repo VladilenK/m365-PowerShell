@@ -1,15 +1,24 @@
-# Get certificate stored in KeyVault
-$VaultName = ""
-$certName = "cert001"
+# ensure you use PowerShell 7
+$PSVersionTable
 
-$secretSecureString = Get-AzKeyVaultSecret -VaultName $vaultName -Name $certName 
-$secretPlainText = ConvertFrom-SecureString -AsPlainText -SecureString $secretSecureString.SecretValue
+# connect to your Azure subscription
+Connect-AzAccount -Subscription "<subscription id>" -Tenant "<tenant id>"
+Get-AzSubscription | fl
+Get-AzContext
+
+# Specify Key Vault Name and Certificate Name
+$VaultName = "<azure key vault name>"
+$certName = "certificate name as it stored in key vault"
+
+# Get certificate stored in KeyVault (Yes, get it as SECRET)
+$secret = Get-AzKeyVaultSecret -VaultName $vaultName -Name $certName
+$secretValueText = ($secret.SecretValue | ConvertFrom-SecureString -AsPlainText )
 
 # connect to PnP
-$orgName = "contoso"
-$tenant = "$orgName.onmicrosoft.com"
-$adminUrl = "https://$orgName-admin.sharepoint.com"
-$clientID = "5a3a432d-c1c1-480a-b2b1-4fcb2b1ed989"
+$tenant = "contoso.onmicrosoft.com" # or tenant Id
+$siteUrl = "https://contoso.sharepoint.com"
+$clientID = "<App (client) Id>" # Azure Registered App with the same certificate and API permissions configured
+Connect-PnPOnline -Url $siteUrl -ClientId $clientID -Tenant $tenant -CertificateBase64Encoded $secretValueText
 
-Connect-PnPOnline -Url $adminUrl -ClientId $clientID -CertificateBase64Encoded $secretPlainText -Tenant $tenant 
-Get-PnPTenant
+Get-PnPSite
+
