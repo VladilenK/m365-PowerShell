@@ -1,6 +1,6 @@
 # pnp
-$url = "https://jvkdev.sharepoint.com"
-Connect-PnPOnline -ClientId "cb3d2f17-f734-4512-b39d-25e0b7472205" -Url $url -Interactive 
+$siteUrl
+Connect-PnPOnline -ClientId $clientid -Url $siteUrl -Interactive 
 $pnpToken = Get-PnPGraphAccessToken 
 $pnpToken
 

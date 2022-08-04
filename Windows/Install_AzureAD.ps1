@@ -22,3 +22,6 @@ UnInstall-Module -Name AzureAD -AllVersions
 Get-InstalledModule -Name AzureAD | Uninstall-Module
 Get-Module AzureAD -ListAvailable | Uninstall-Module
 
+Connect-AzureAD -ApplicationId $clientID -TenantId $tenantId -CertificateThumbprint $thumbprint
+
+$PSVersionTable

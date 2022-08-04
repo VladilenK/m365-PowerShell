@@ -12,3 +12,4 @@ $cert.DnsNameList
 $cert.Thumbprint
 $cert | fl -Property *
 $cert.RawData
+

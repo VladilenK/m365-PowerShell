@@ -1,15 +1,29 @@
 Get-Command *scop* -Module PnP.PowerShell
 
+$connection
+
 $siteUrl = "https://uhgdev.sharepoint.com/sites/Birding_in_KZ"
 $siteUrl = "https://uhgdev.sharepoint.com/sites/ContosoHub"
-$connection
+$siteUrl = "https://uhgdev.sharepoint.com/sites/test-Ext-05-Standalone-Site"
+$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Ext-02-Internal-Only-Policy"
+$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Ext-01-None"
+
 $pnpTenantSite = Get-PnPTenantSite -Identity $siteUrl -Detailed -Connection $connection
-$pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages | fl
+$pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel | fl
 $pnpTenantSite
 
 Set-PnPTenantSite -Identity $siteUrl -Connection $connection -DenyAddAndCustomizePages:$false
+Set-PnPTenantSite -Identity $siteUrl -Connection $connection -DenyAddAndCustomizePages:$true
 Set-PnPTenantSite -Identity $siteUrl -Connection $connection -Owners $adminUPN
 
+# sensitivity label
+$pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel | fl
+$Id1 = [GUID]("0f4b1e4f-9646-4748-b397-283325ce9f49") # Test Label 01
+$Id2 = [GUID]("737dde27-1b61-4232-b976-7ff1148da60c") # Internal-Only Site Group
+$Id3 = [GUID]("27b5d387-be3c-4c5d-b59c-f204385c2ff3") # External Access Enabled Site or Group
+
+Set-PnPTenantSite -Identity $siteUrl -Connection $connection  -RemoveLabel 
+Set-PnPTenantSite -Identity $siteUrl -Connection $connection -SensitivityLabel $id2
 
 $siteConnection = Connect-PnPOnline -Url $siteUrl -ClientId $appId -ForceAuthentication -ReturnConnection -Interactive
 $siteConnection 
