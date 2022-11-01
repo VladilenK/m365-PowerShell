@@ -2,6 +2,10 @@
 Start-process "https://docs.microsoft.com/en-us/powershell/microsoftgraph/overview?view=graph-powershell-1.0"
 
 Find-Module -Command 'get-mgusermessage'
+Find-Module -Command 'get-mggroup'
+
+Find-Module -Name Microsoft.Graph.Groups
+Install-Module -Name Microsoft.Graph.Groups
 
 Install-Module -Name Microsoft.Graph.Authentication 
 Import-Module Microsoft.Graph.Authentication

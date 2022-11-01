@@ -2,14 +2,15 @@ Get-Command *scop* -Module PnP.PowerShell
 
 $connection
 
-$siteUrl = "https://uhgdev.sharepoint.com/sites/Birding_in_KZ"
-$siteUrl = "https://uhgdev.sharepoint.com/sites/ContosoHub"
-$siteUrl = "https://uhgdev.sharepoint.com/sites/test-Ext-05-Standalone-Site"
 $siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Ext-02-Internal-Only-Policy"
 $siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Ext-01-None"
+$siteUrl = "https://uhgdev.sharepoint.com/sites/ContosoHub"
+$siteUrl = "https://uhgdev.sharepoint.com/sites/test-Ext-05-Standalone-Site"
+$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Parallel-000"
+$siteUrl = "https://uhgdev.sharepoint.com/sites/Birding_in_KZ"
 
 $pnpTenantSite = Get-PnPTenantSite -Identity $siteUrl -Detailed -Connection $connection
-$pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel | fl
+$pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel, Owner | fl
 $pnpTenantSite
 
 Set-PnPTenantSite -Identity $siteUrl -Connection $connection -DenyAddAndCustomizePages:$false
