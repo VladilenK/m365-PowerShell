@@ -7,6 +7,7 @@ Find-Module AzureAD
 Install-Module -Name AzureAD -Scope CurrentUser
 Install-Module -Name AzureAD -AllowClobber -Scope CurrentUser
 Install-Module -Name AzureAD -AllowClobber -Scope AllUsers 
+Install-Module -Name AzureAD -Scope CurrentUser -RequiredVersion 2.0.1.10
 
 Import-Module AzureAD 
 Import-Module AzureAD -RequiredVersion 5.7.0
