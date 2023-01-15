@@ -1,6 +1,5 @@
-$clientId = "f001f1f9-cd40-421b-82d9-bcc71592aece"
-$loginUPN = "GlAdmin@uhgdev.onmicrosoft.com"
-$loginUPN = "Vladilen@uhgdev.onmicrosoft.com"
+$clientId = ""
+$loginUPN = ""
 Connect-ExchangeOnline -UserPrincipalName $loginUpn
 Get-EXOMailbox -Verbose -Debug
 
