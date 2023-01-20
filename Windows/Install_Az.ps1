@@ -11,7 +11,7 @@ Install-Module -Name Az -AllowClobber -Scope AllUsers
 Import-Module Az -RequiredVersion 5.7.0
 
 Remove-Module Az
-Update-Module Az -Scope CurrentUser
+Update-Module Az -Scope CurrentUser -Force
 Update-Module Az -Scope AllUsers 
 
 UnInstall-Module -Name Az -AllVersions 
