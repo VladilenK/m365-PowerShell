@@ -1,4 +1,6 @@
-﻿$siteUrl = "https://$orgname.sharepoint.com/sites/TestTeamSite_01"
+﻿# below are sample scripts to add, update and remove list items
+
+$siteUrl = "https://$orgname.sharepoint.com/sites/TestTeamSite_01"
 # Connect-PnPOnline -Url $siteUrl -ClientId $clientID -CertificateBase64Encoded $secretPlainText -Tenant $tenant 
 Connect-PnPOnline -Url $siteUrl -ClientId $clientID -ClientSecret $clientSc
 Get-PnPSite | ft -a
@@ -10,7 +12,7 @@ $list.ItemCount
 # add list items
 # withOut BATCHES
 $timeStart = Get-Date
-1..20 | ForEach-Object { 
+1..100 | ForEach-Object { 
     $number = 1
     $title = "Test Title $_" + $( -join ((65..90) + (97..122) | Get-Random -Count 15 | ForEach-Object { [char]$_ }))
     $values = @{"Title" = $title; "Number" = $number }
@@ -23,8 +25,8 @@ $timeElapsed.TotalSeconds
 # with BATCHES
 $timeStart = Get-Date
 $batch = New-PnPBatch
-1..7000 | ForEach-Object { 
-    $number = 31100
+1..37000 | ForEach-Object { 
+    $number = 1133
     $title = "Test Title $_" + $( -join ((65..90) + (97..122) | Get-Random -Count 15 | ForEach-Object { [char]$_ }))
     $values = @{"Title" = $title; "Number" = $number }
     Add-PnPListItem -List $list -Values $values -Batch $batch 

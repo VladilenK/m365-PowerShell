@@ -6,7 +6,7 @@ $timeStart = Get-Date
     $title = "Test-Parallel-{0:000}" -f $_
     $Url = "https://uhgdev.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
     $owner = "vladilen@uhgdev.onmicrosoft.com"
-    New-PnPTenantSite -Title $title -Url $url -Owner $owner -Template "STS#3" -TimeZone "6" -Connection $connection
+    New-PnPTenantSite -Title $title -Url $url -Owner $owner -Template "STS#3" -TimeZone "6" -Connection $connectionAdmin
 }
 $timeFinish = Get-Date
 $timeElapsed = $timeFinish - $timeStart
