@@ -1,4 +1,4 @@
-
+Connect-PnPOnline -Url $adminUrl -ClientId $clientId -ClientSecret $clientSc 
 $connection.Url
 
 $upn = 'test-user-1100@uhgdev.onmicrosoft.com'

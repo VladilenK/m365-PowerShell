@@ -25,8 +25,8 @@ $listItems[0].FieldValues.Editor.LookupValue
 # select items to delete based on criteria
 $listItems.count
 $itemsToDelete = $listItems | Where-Object { $_.FieldValues["Modified"] -gt "1/1/2023" } | Sort-Object Id 
-$itemsToDelete = $listItems | Where-Object { $_.FieldValues["Modified"] -gt "2/12/2023" } | Sort-Object Id 
-$itemsToDelete = $listItems | Where-Object { $_.FieldValues["Modified"] -gt "2023-02-12" } | Sort-Object Id 
+# $itemsToDelete = $listItems | Where-Object { $_.FieldValues["Modified"] -gt "2/12/2023" } | Sort-Object Id 
+# $itemsToDelete = $listItems | Where-Object { $_.FieldValues["Modified"] -gt "2023-02-12" } | Sort-Object Id 
 $itemsToDelete.Count
 
 ($itemsToDelete[0..2] + $itemsToDelete[-3..-1] ) | select Id, `
@@ -34,11 +34,28 @@ $itemsToDelete.Count
 @{Name = "Modified"; Expression = { $_.FieldValues["Modified"] } }, `
 @{Name = "Editor"; Expression = { $_.FieldValues["Editor"].LookupValue } }
 
-# remove Items with batches
+# remove Items with one batch
 $timeStart = Get-Date
 $batch = New-PnPBatch
 $itemsToDelete | Foreach-Object { Remove-PnPListItem -List $list -Identity $_.Id -Batch $batch }
 Invoke-PnPBatch -Batch $batch
+$timeFinish = Get-Date
+$timeElapsed = $timeFinish - $timeStart
+$timeElapsed.TotalSeconds
+
+# remove Items with smaller batches
+$batchSize = 1000
+$timeStart = Get-Date
+$i = 0; $moreItems = $true
+do {
+    $batchItemsToDelete = $ItemsToDelete | Select-Object -First $batchSize -Skip ($i*$batchSize)
+    if ($batchItemsToDelete.Count -lt $batchSize) {$moreItems = $false}
+    Write-Host "Batch " $i ", size " $batchItemsToDelete.Count
+    $batch = New-PnPBatch
+    $batchItemsToDelete | Foreach-Object { Remove-PnPListItem -List $list -Identity $_.Id -Batch $batch }
+    Invoke-PnPBatch -Batch $batch
+    $i++
+} while ($moreItems)
 $timeFinish = Get-Date
 $timeElapsed = $timeFinish - $timeStart
 $timeElapsed.TotalSeconds

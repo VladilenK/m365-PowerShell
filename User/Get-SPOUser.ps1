@@ -1,6 +1,5 @@
-Connect-PnPOnline -Url $adminUrl -ClientId $clientId -ClientSecret $clientSc 
-
-$connection.Url
+# Connect-PnPOnline -Url $adminUrl -ClientId $clientId -ClientSecret $clientSc 
+Connect-PnPOnline -Url $adminUrl -ClientId $clientId -Tenant $tenantId -Thumbprint $certThumbprint
 
 Get-PnPAzureADUser 
 Get-PnPAzureADUser | ? { $_.UserPrincipalname -match 11 } 
@@ -32,8 +31,7 @@ Set-PnPUserProfileProperty -Account 'test-user-1105@uhgdev.onmicrosoft.com' -Pro
 # AzureAD
 
 # auto:
-# Connect-AzureAD -ApplicationId $clientID -TenantId $tenantId -CertificateThumbprint $certThumbprint
-Connect-AzureAD 
+Connect-AzureAD -ApplicationId $clientID -TenantId $tenantId -CertificateThumbprint $certThumbprint
 
 Get-azureaduser 
 Get-azureaduser -ObjectId test-user-1103@uhgdev.onmicrosoft.com | fl 
@@ -44,14 +42,9 @@ $user.tojson()
 $user | fl | clip
 $user.ShowInAddressList
 
-Get-AzureADUser -ObjectId test-user-1104@uhgdev.onmicrosoft.com | Select -ExpandProperty ExtensionProperty
+$aadUser = Get-PnPAzureADUser -Identity test-user-1104@uhgdev.onmicrosoft.com -Select AdditionalProperties
+$aadUser.AdditionalProperties["AdditionalData"]
 
-Get-AzureADUser -ObjectId test-user-1101@uhgdev.onmicrosoft.com | Select -ExpandProperty ShowInAddressList
-Get-AzureADUser -ObjectId test-user-1102@uhgdev.onmicrosoft.com | Select -ExpandProperty ShowInAddressList
-Get-AzureADUser -ObjectId test-user-1103@uhgdev.onmicrosoft.com | Select -ExpandProperty ShowInAddressList
-Get-AzureADUser -ObjectId test-user-1104@uhgdev.onmicrosoft.com | Select -ExpandProperty ShowInAddressList
-Get-AzureADUser -ObjectId test-user-1105@uhgdev.onmicrosoft.com | Select -ExpandProperty ShowInAddressList
-Get-AzureADUser -ObjectId test-user-1106@uhgdev.onmicrosoft.com | Select -ExpandProperty ShowInAddressList
 
 Set-AzureADUser -ObjectId test-user-1105@uhgdev.onmicrosoft.com -ShowInAddressList $false
 Set-AzureADUser -ObjectId test-user-1105@uhgdev.onmicrosoft.com -ShowInAddressList 1
@@ -61,3 +54,13 @@ Set-AzureADUser -ObjectId test-user-1106@uhgdev.onmicrosoft.com -ShowInAddressLi
 
 Get-AzureADApplication | Get-AzureADApplicationExtensionProperty
 
+# Az
+Connect-AzAccount -ApplicationId $clientId -CertificateThumbprint $certThumbprint -Tenant $tenantId 
+Get-AzADUser
+Get-AzADUser -UserPrincipalName test-user-1100@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1101@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1102@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1103@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1104@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1105@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1106@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
