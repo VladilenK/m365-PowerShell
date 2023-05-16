@@ -5,6 +5,7 @@ powershell.exe -NoLogo -NoProfile -Command 'Install-Module -Name PackageManageme
 ###################################################################################################
 # PnP.PowerShell 
 Get-InstalledModule -Name PnP.PowerShell -AllVersions
+Find-Module PnP.PowerShell
 
 Get-Module -ListAvailable | ? { $_.Name -like "*pnp*" }
 Get-Module -Name PnP.PowerShell 
@@ -20,7 +21,6 @@ Get-Module -ListAvailable -Name PnP.PowerShell | ? { $_.Version -ne '1.10.0' } |
 
 Update-Module -Name PnP.PowerShell -Scope CurrentUser -Force
 
-Find-Module PnP.PowerShell
 Find-Module PnP.PowerShell | Install-Module -AllowClobber -Scope CurrentUser
 
 Find-Module PnP.PowerShell -AllowPrerelease
