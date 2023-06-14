@@ -6,18 +6,11 @@ $groupId = 'fff5dfa4-de04-43e0-8add-cf9031fa9eb1'  #
 $groupId = '79dcd676-127c-4cc0-9acd-d3116c7e7c06'  # 
 $groupId = '25d0d732-66cd-42e5-8b70-6536db5c4c74'  # 
 $groupId = '179802d3-e525-4209-acc2-67d59d9c8d68'  # Test-21
-$groupId = '010a41bb-bb31-4a11-ad02-1627597268df'  # 602
-$groupId = '0b27bd21-6e75-4069-9d84-337a5d814cc6'  # 614
-$groupId = '9b157abe-0375-40b6-b788-b6c6be455af1'  # Test-Sites-Selected
-$groupId = 'a738c357-0b80-427c-9dbd-77b505aa1ea6'  # TestPrivteam-ownerlessgroupspolicy
-$groupId = 'a1a667f7-1433-401c-b384-0b34dc2fd680'  # 603
-$groupId = '92d1bceb-33d4-4db2-afce-6495d461a92e'  # 604
-$groupId = '80e65035-e6e7-45c3-8fa6-b412bdf11e97'  # 605
 
-$group = Get-PnPMicrosoft365Group -IncludeSiteUrl -IncludeOwners -Identity $groupId
+$group = Get-PnPMicrosoft365Group -IncludeSiteUrl -IncludeOwners -Identity $groupId -Connection $connection
 $group | Select-Object MailNickname, CreatedDateTime, RenewedDateTime, HideFromAddressLists, AllowToAddGuests
 
-Reset-PnPMicrosoft365GroupExpiration -Identity $groupId
+Reset-PnPMicrosoft365GroupExpiration -Identity $groupId -Connection $connection
 
 $group.RenewedDateTime = $((Get-Date).AddDays(-90))
 $group.RenewedDateTime
@@ -35,7 +28,7 @@ Get-MgGroup -GroupId $groupId
 $mgGroup = Get-MgGroup -GroupId $groupId 
 $mgGroup.RenewedDateTime
 $params = @{
-    description     = "Test-21 group description"
+    description = "Test-21 group description"
     RenewedDateTime = "2023-01-01"
 }
 Update-MgGroup -GroupId $groupId -BodyParameter $params
