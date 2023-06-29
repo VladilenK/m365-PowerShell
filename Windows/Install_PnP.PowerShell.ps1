@@ -15,13 +15,16 @@ Get-Module -Name PnP.PowerShell -ListAvailable | ft Name, Version, Path
 Import-Module -Name PnP.PowerShell 
 
 Remove-Module -Name PnP.PowerShell -Force 
+
 Uninstall-Module -Name PnP.PowerShell -Force -AllowPrerelease -AllVersions
 Uninstall-Module -Name PnP.PowerShell -Force -RequiredVersion 1.4.0
+Uninstall-Module -Name PnP.PowerShell -Force  -RequiredVersion 2.1.1
 Get-Module -ListAvailable -Name PnP.PowerShell | ? { $_.Version -ne '1.10.0' } | Uninstall-Module
 
 Update-Module -Name PnP.PowerShell -Scope CurrentUser -Force
 
 Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force -RequiredVersion 1.12.0
+Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force -RequiredVersion 2.1.1
 
 Find-Module PnP.PowerShell | Install-Module -AllowClobber -Scope CurrentUser
 
@@ -58,6 +61,12 @@ get-module -ListAvailable | ? { $_.Name -like "*Identity*" }
 find-module -Name "Microsoft.Identity.Client"
 Install-module -Name "Microsoft.Identity.Client"
 Import-module -Name "Microsoft.Identity.Client" 
+Import-module -Name "Microsoft.Identity.Client" -RequiredVersion 4.50.0
+
+Install-module -Name "Microsoft.Identity.Client" -RequiredVersion 4.50.0 -Scope CurrentUser
+Install-module -Name "Microsoft.Identity.Client" -RequiredVersion 4.50.0 -Scope AllUsers 
+
+UnInstall-module -Name "Microsoft.Identity.Client" -RequiredVersion 4.53.0 
 
 find-module Microsoft.IdentityModel.Abstractions
 dotnet add package Microsoft.IdentityModel.Abstractions --version 6.22.0

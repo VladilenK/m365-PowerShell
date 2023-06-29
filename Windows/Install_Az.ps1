@@ -25,7 +25,7 @@ Get-InstalledModule -Name Az.Account
 Get-InstalledModule -Name Az -AllVersions | Select-Object -Property Name, Version
 Get-Module Az.Account  
 Get-Module Az.Account  -ListAvailable 
-Find-Module Az
+Find-Module Az.Account
 
 Install-Module -Name Az.Account -AllowClobber -Scope CurrentUser
 
@@ -33,6 +33,14 @@ Import-Module Az -RequiredVersion 5.7.0
 
 Remove-Module Az
 Update-Module Az.Account
+
+# Resources
+Get-Module Az.Resources -ListAvailable 
+Find-Module Az.Resources
+
+Update-Module Az.Resources
+Remove-Module Az.Resources
+Import-Module Az.Resources
 
 
 
