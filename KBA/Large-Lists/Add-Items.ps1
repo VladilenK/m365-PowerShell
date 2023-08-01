@@ -1,18 +1,17 @@
-﻿# below are sample scripts to add, update and remove list items
+# below are sample scripts to add, update and remove list items
 
 $siteUrl = "https://$orgname.sharepoint.com/sites/Test001"
-Connect-PnPOnline -ClientId $clientId -Interactive -Url $siteUrl 
+Connect-PnPOnline -ClientId $clientId -Interactive -Url $siteUrl -ForceAuthentication
 Get-PnPSite | ft -a
 
-$list = Get-PnPList -Identity "LargeList01" -Includes Fields
+$list = Get-PnPList -Identity "LargeList01"
 $list | ft -a
-$list.Fields
 $list.ItemCount
 
 # add list items
 # withOut BATCHES
 $timeStart = Get-Date
-1..10 | ForEach-Object { 
+1..100 | ForEach-Object { 
     $number = 1
     $title = "Test Title $_" + $( -join ((65..90) + (97..122) | Get-Random -Count 15 | ForEach-Object { [char]$_ }))
     $values = @{"Title" = $title; "Number" = $number }
@@ -26,7 +25,7 @@ $timeElapsed.TotalSeconds
 $timeStart = Get-Date
 $batch = New-PnPBatch
 1..10000 | ForEach-Object { 
-    $number = 1143 + (Get-Random -Minimum 0 -Maximum 99)
+    $number = 2254
     $title = "Test Title $_" + $( -join ((65..90) + (97..122) | Get-Random -Count 15 | ForEach-Object { [char]$_ }))
     $values = @{"Title" = $title; "Number" = $number }
     Add-PnPListItem -List $list -Values $values -Batch $batch 
@@ -39,11 +38,11 @@ $timeElapsed.TotalSeconds
 # try Parallel: Add-PnPListItem
 $timeStart = Get-Date
 1..100 | ForEach-Object -Parallel { 
-    $number = 1141
+    $number = 9
     $title = "Test Title $_" + $( -join ((65..90) + (97..122) | Get-Random -Count 15 | ForEach-Object { [char]$_ }))
     $values = @{"Title" = $title; "Number" = $number }
-    Add-PnPListItem -List "LargeList01" -Values $values 
-} -ThrottleLimit 2
+    Add-PnPListItem -List "LargeList1" -Values $values 
+} -ThrottleLimit 5
 $timeFinish = Get-Date
 $timeElapsed = $timeFinish - $timeStart
 $timeElapsed.TotalSeconds

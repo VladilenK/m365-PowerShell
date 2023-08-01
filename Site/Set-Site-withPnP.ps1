@@ -8,6 +8,8 @@ $siteUrl = "https://uhgdev.sharepoint.com/sites/ContosoHub"
 $siteUrl = "https://uhgdev.sharepoint.com/sites/test-Ext-05-Standalone-Site"
 $siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Parallel-000"
 $siteUrl = "https://uhgdev.sharepoint.com/sites/Birding_in_KZ"
+$siteUrl = "https://uhgdev.sharepoint.com/sites/TestCommSite_01"
+$siteUrl = "https://uhgdev.sharepoint.com/sites/TestCommSite_01/SubSite_01"
 
 $pnpTenantSite = Get-PnPTenantSite -Identity $siteUrl -Detailed -Connection $connection
 $pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel, Owner | fl
@@ -26,13 +28,16 @@ $Id3 = [GUID]("27b5d387-be3c-4c5d-b59c-f204385c2ff3") # External Access Enabled 
 Set-PnPTenantSite -Identity $siteUrl -Connection $connection  -RemoveLabel 
 Set-PnPTenantSite -Identity $siteUrl -Connection $connection -SensitivityLabel $id2
 
-$siteConnection = Connect-PnPOnline -Url $siteUrl -ClientId $appId -ForceAuthentication -ReturnConnection -Interactive
+$siteConnection = Connect-PnPOnline -Url $siteUrl -ClientId $clientID -Tenant $tenantId -Thumbprint $certThumbprint
 $siteConnection 
 $pnpSite = Get-PnPSite -Connection $siteConnection -Includes Url, IsHubSite, HubSiteId, SearchBoxInNavBar, SearchBoxPlaceholderText
 $pnpSite | Select-Object Url, IsHubSite, HubSiteId, SearchBoxInNavBar, SearchBoxPlaceholderText
 
 $pnpWeb = Get-PnPWeb  -Connection $siteConnection -Includes Url, Title, WebTemplate, SearchBoxInNavBar, SearchBoxPlaceholderText, SearchScope 
 $pnpWeb | fl  Url, Title, WebTemplate, SearchBoxInNavBar, SearchBoxPlaceholderText, SearchScope 
+
+
+
 
 # 1=tenant, 2=Hub, 3=site, 0=default
 $pnpWeb.SearchScope = 2

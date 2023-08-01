@@ -17,7 +17,7 @@ $groupId = '80e65035-e6e7-45c3-8fa6-b412bdf11e97'  # 605
 $group = Get-PnPMicrosoft365Group -IncludeSiteUrl -IncludeOwners -Identity $groupId
 $group | Select-Object MailNickname, CreatedDateTime, RenewedDateTime, HideFromAddressLists, AllowToAddGuests
 
-Reset-PnPMicrosoft365GroupExpiration -Identity $groupId
+Reset-PnPMicrosoft365GroupExpiration -Identity $groupId 
 
 $group.RenewedDateTime = $((Get-Date).AddDays(-90))
 $group.RenewedDateTime
@@ -25,10 +25,21 @@ Invoke-PnPQuery
 
 Set-PnPMicrosoft365Group -Identity $groupId -HideFromAddressLists $true
 
+# group membership
+Get-PnPMicrosoft365GroupOwner  -Identity $groupId 
+Get-PnPMicrosoft365GroupOwner  -Identity $groupId | % { Get-PnPAzureADUser -Identity $_.Id }
+Get-PnPMicrosoft365GroupMember -Identity $groupId 
+Add-PnPMicrosoft365GroupOwner -Identity $groupId -Users "Jan@uhgdev.onmicrosoft.com"
+Add-PnPMicrosoft365GroupOwner -Identity $groupId -Users "370a89fb-88db-4102-a3a9-0b603a0635b2"
+Remove-PnPMicrosoft365GroupOwner -Identity $groupId -Users "370a89fb-88db-4102-a3a9-0b603a0635b2"
+
+
+
+# MgGraph - Microsoft.Graph
 Import-Module Microsoft.Graph.Groups
-$tenantId = '887d660e-c53f-4c38-af69-214fe2a73f0a'
-$clientid = '5011b163-c4ee-48e5-850d-fadbcc79983d' # SPO_FullControl_App (FullControl)
-$certThumbprint = 'D573D69810F63F027E3DA172FB922D1D0A54036C'
+# $tenantId = '887d660e-c53f-4c38-af69-214fe2a73f0a'
+# $clientid = '5011b163-c4ee-48e5-850d-fadbcc79983d' # SPO_FullControl_App (FullControl)
+# $certThumbprint = 'D573D69810F63F027E3DA172FB922D1D0A54036C'
 Disconnect-MgGraph
 Connect-MgGraph -ClientId $clientid -CertificateThumbprint $certThumbprint -TenantId $tenantId 
 Get-MgGroup -GroupId $groupId 

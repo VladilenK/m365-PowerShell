@@ -5,7 +5,7 @@ $timeStart = Get-Date
 151..160 | ForEach-Object {
     $title = "Test-Parallel-{0:000}" -f $_
     $alias = "Test-Parallel-{0:000}" -f $_
-    New-PnPSite -Type TeamSite -Title $title -Alias $alias -Connection $connectionAdminInteractive
+    New-PnPSite -Type TeamSite -Title $title -Alias $alias -Connection $connectionAdminInteractive 
 }
 $timeFinish = Get-Date
 $timeElapsed = $timeFinish - $timeStart
