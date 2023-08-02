@@ -7,7 +7,7 @@ $i = 0
 # 401..421 | ForEach-Object {
 Get-Random -Minimum 1 -Maximum 500 -Count 20 | ForEach-Object {
     $i++
-    $Url = "https://uhgdev.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
+    $Url = "https://$orgname.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
     $pnpTenantSite = Get-PnPTenantSite -Identity $Url -Detailed -Connection $connection
     if ($?) { Write-Host "*" -ForegroundColor Green -NoNewline } else { Write-Host "`n0" -ForegroundColor Yellow }
     if ($pnpTenantSite.Url -eq $Url) { } else { Write-Host "`n0" -ForegroundColor Yellow }
@@ -34,7 +34,7 @@ $sites | ForEach-Object -Parallel {
     $_ | Add-Member -MemberType NoteProperty -Name "MyStatus" -Value $null -Force
     $counter = $using:i; $counter++
     $err = $using:errorsLog
-    # $Url = "https://uhgdev.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
+    # $Url = "https://$orgname.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
     $Url = $_.Url
     $pnpTenantSite = $null
     $pnpTenantSite = Get-PnPTenantSite -Identity $Url -Detailed -Connection $using:connection -ErrorAction SilentlyContinue
@@ -54,7 +54,7 @@ $sites | ForEach-Object -Parallel {
         }
         else { 
             Write-Host "`n0" -ForegroundColor DarkMagenta; $err += $_ 
-            Write-Host $_.Url.TrimStart('https://uhgdev.sharepoint.com/teams/Test-Parallel-')
+            Write-Host $_.Url.TrimStart('https://$orgname.sharepoint.com/teams/Test-Parallel-')
             $_.MyStatus = "Err2"
         }
     }

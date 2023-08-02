@@ -4,7 +4,7 @@
 
 $PSVersionTable
 # must be PowerShell 5.1 x64
-$upn = "Vladilen@uhgdev.onmicrosoft.com"
+$upn = "Vladilen@$orgname.onmicrosoft.com"
 
 Get-Module AzureADPreview -ListAvailable 
 Find-Module AzureADPreview 
@@ -60,9 +60,9 @@ Get-Label -Identity $Id
 Get-Label -Identity $label.ImmutableId
 
 
-$adminUrl = "https://uhgdev-admin.sharepoint.com" 
+$adminUrl = "https://$orgname-admin.sharepoint.com" 
 Connect-SPOService -Url $adminUrl
-$siteUrl = "https://uhgdev.sharepoint.com/teams/test-21"
+$siteUrl = "https://$orgname.sharepoint.com/teams/test-21"
 $site = Get-SPOSite -Identity $siteUrl 
 $site | Select-Object Url, SensitivityLabel 
 Set-SPOSite -Identity $siteUrl -SensitivityLabel $Id 

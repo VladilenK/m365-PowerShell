@@ -29,7 +29,7 @@ Set-PnPMicrosoft365Group -Identity $groupId -HideFromAddressLists $true
 Get-PnPMicrosoft365GroupOwner  -Identity $groupId 
 Get-PnPMicrosoft365GroupOwner  -Identity $groupId | % { Get-PnPAzureADUser -Identity $_.Id }
 Get-PnPMicrosoft365GroupMember -Identity $groupId 
-Add-PnPMicrosoft365GroupOwner -Identity $groupId -Users "Jan@uhgdev.onmicrosoft.com"
+Add-PnPMicrosoft365GroupOwner -Identity $groupId -Users "Jan@$orgname.onmicrosoft.com"
 Add-PnPMicrosoft365GroupOwner -Identity $groupId -Users "370a89fb-88db-4102-a3a9-0b603a0635b2"
 Remove-PnPMicrosoft365GroupOwner -Identity $groupId -Users "370a89fb-88db-4102-a3a9-0b603a0635b2"
 

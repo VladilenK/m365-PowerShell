@@ -1,6 +1,5 @@
 Connect-MgGraph -Scopes "Mail.Read"
-Get-MgUserMessage -UserId "Vladilen@uhgdev.onmicrosoft.com"
-Get-MgUserMessage -UserId "Vlad@uhgdev.onmicrosoft.com"
+Get-MgUserMessage -UserId $userId
 
 Find-MgGraphCommand -Command 'Get-MGAuditlogsignin' 
 Find-MgGraphCommand -Uri 'sites'
@@ -28,7 +27,7 @@ Invoke-MgGraphRequest -Method GET -Uri $uri -OutputFilePath $reportFilePath
 Import-Csv -Path $reportFilePath | Out-GridView
 
 Get-Command -Module Microsoft.Graph.Authentication 
-Get-Command -Module Microsoft.Graph.Identity | ?{$_.Name -like "*token*"}
+Get-Command -Module Microsoft.Graph.Identity | ? { $_.Name -like "*token*" }
 
 
 

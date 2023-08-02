@@ -25,7 +25,7 @@ Add-Type -Path "C:\Users\Vlad\Documents\WindowsPowerShell\Modules\AzureADPreview
 
 Add-Type -Path "C:\Users\Vlad\Documents\WindowsPowerShell\Modules\AzureAD\2.0.1.10\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
 Add-Type -Path "C:\Users\Vlad\Documents\WindowsPowerShell\Modules\AzureAD\2.0.2.140\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
-$authContext3 = New-Object Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext -ArgumentList "https://login.windows.net/uhgdev.onmicrosoft.com"
+$authContext3 = New-Object Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext -ArgumentList "https://login.windows.net/$orgname.onmicrosoft.com"
 $plat = New-Object Microsoft.IdentityModel.Clients.ActiveDirectory.PlatformParameters -ArgumentList "Auto"
 $authenticationResult = $authContext3.AcquireTokenAsync("https://outlook.office365.com", "fb78d390-0c51-40cd-8e17-fdbfab77341b", "https://login.microsoftonline.com/common/oauth2/nativeclient", $plat)
 # $authenticationResult = $authContext3.AcquireTokenAsync("https://outlook.office365.com", "f001f1f9-cd40-421b-82d9-bcc71592aece", "https://login.microsoftonline.com/common/oauth2/nativeclient", $plat)

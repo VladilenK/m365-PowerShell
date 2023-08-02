@@ -4,8 +4,8 @@
 $timeStart = Get-Date
 1..10 | ForEach-Object {
     $title = "Test-Parallel-{0:000}" -f $_
-    $Url = "https://uhgdev.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
-    $owner = "vladilen@uhgdev.onmicrosoft.com"
+    $Url = "https://$orgname.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
+    $owner = "vladilen@$orgname.onmicrosoft.com"
     New-PnPTenantSite -Title $title -Url $url -Owner $owner -Template "STS#3" -TimeZone "6" -Connection $connectionAdmin
 }
 $timeFinish = Get-Date
@@ -17,8 +17,8 @@ $timeElapsed.TotalSeconds
 $timeStart = Get-Date
 1000..1500 | ForEach-Object -Parallel {
     $title = "Test-Parallel-{0:0000}" -f $_
-    $Url = "https://uhgdev.sharepoint.com/teams/Test-Parallel-{0:0000}" -f $_
-    $owner = "vladilen@uhgdev.onmicrosoft.com"
+    $Url = "https://$orgname.sharepoint.com/teams/Test-Parallel-{0:0000}" -f $_
+    $owner = "vladilen@$orgname.onmicrosoft.com"
     $template = "STS#3"
     $template = "SITEPAGEPUBLISHING#0"
     New-PnPTenantSite -Title $title -Url $url -Owner $owner -Template $template -TimeZone "6" -Connection $using:connection

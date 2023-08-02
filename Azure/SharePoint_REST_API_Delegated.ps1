@@ -1,10 +1,10 @@
 # PowerShell 7
 $PSVersionTable
 
-$upn = "Vlad@uhgdev.onmicrosoft.com"
+$upn = $userId
 
 # SharePoint REST
-$SiteURL = "https://uhgdev.sharepoint.com/sites/spo-app-test-01"
+$SiteURL = "https://$orgname.sharepoint.com/sites/spo-app-test-01"
 $clientID # with Delegated permissions
 $connectionSite = Connect-PnPOnline -Url $SiteURL -Interactive -ReturnConnection -ClientId $clientID
 $RestMethodURL = $SiteURL + '/_api/web/lists?$select=Title'

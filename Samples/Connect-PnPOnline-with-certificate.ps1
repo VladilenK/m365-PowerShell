@@ -10,7 +10,7 @@ $secretPlainText.Substring(0, 4)
 
 # connect to PnP with certificate stored in KeyVault
 $orgName = "contoso"
-$orgName = "uhgdev"
+$orgName = "$orgname"
 $tenant = "$orgName.onmicrosoft.com"
 $adminUrl = "https://$orgName-admin.sharepoint.com"
 

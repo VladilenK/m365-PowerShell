@@ -6,15 +6,15 @@ $group.AssignedLabels
 $aadGroup = Get-PnPAzureADGroup -Identity $groupId 
 $aadGroup | fl
 
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-01"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-01-Ch03-Shared"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-01-Ch05-Private"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-01-Ch01-Private"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-01-Ch02-Shared"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-01-Ch03-Shared2"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-02"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-02-Ch02-Shared"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-sens-labels-02-Ch01-Private"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-01"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-01-Ch03-Shared"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-01-Ch05-Private"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-01-Ch01-Private"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-01-Ch02-Shared"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-01-Ch03-Shared2"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-02"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-02-Ch02-Shared"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-sens-labels-02-Ch01-Private"
 
 $site = Get-PnPTenantSite -Identity $siteUrl -Detailed
 $site | fl Url, SensitivityLabel

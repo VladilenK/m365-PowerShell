@@ -17,15 +17,15 @@ $UserProp.UserProfileProperties.'SPS-HideFromAddressLists'
 
 $users | % { Get-PnPUserProfileProperty -Account $_.UserPrincipalname } | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
 
-Get-PnPUserProfileProperty -Account 'test-user-1101@uhgdev.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
-Get-PnPUserProfileProperty -Account 'test-user-1102@uhgdev.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
-Get-PnPUserProfileProperty -Account 'test-user-1103@uhgdev.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
-Get-PnPUserProfileProperty -Account 'test-user-1104@uhgdev.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
-Get-PnPUserProfileProperty -Account 'test-user-1105@uhgdev.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
-Get-PnPUserProfileProperty -Account 'test-user-1106@uhgdev.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
+Get-PnPUserProfileProperty -Account 'test-user-1101@$orgname.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
+Get-PnPUserProfileProperty -Account 'test-user-1102@$orgname.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
+Get-PnPUserProfileProperty -Account 'test-user-1103@$orgname.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
+Get-PnPUserProfileProperty -Account 'test-user-1104@$orgname.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
+Get-PnPUserProfileProperty -Account 'test-user-1105@$orgname.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
+Get-PnPUserProfileProperty -Account 'test-user-1106@$orgname.onmicrosoft.com' | % { $_.UserProfileProperties.'SPS-HideFromAddressLists' }
 
 # Set-PnPUserProfileProperty -Account $users[4].UserPrincipalName -PropertyName 'SPS-HideFromAddressLists' -Value 'True'
-Set-PnPUserProfileProperty -Account 'test-user-1105@uhgdev.onmicrosoft.com' -PropertyName 'SPS-HideFromAddressLists' -Value 'True'
+Set-PnPUserProfileProperty -Account 'test-user-1105@$orgname.onmicrosoft.com' -PropertyName 'SPS-HideFromAddressLists' -Value 'True'
 
 #############################################################
 # AzureAD
@@ -34,33 +34,33 @@ Set-PnPUserProfileProperty -Account 'test-user-1105@uhgdev.onmicrosoft.com' -Pro
 Connect-AzureAD -ApplicationId $clientID -TenantId $tenantId -CertificateThumbprint $certThumbprint
 
 Get-azureaduser 
-Get-azureaduser -ObjectId test-user-1103@uhgdev.onmicrosoft.com | fl 
-Get-azureaduser -ObjectId test-user-1105@uhgdev.onmicrosoft.com | fl 
-$user = Get-azureaduser -ObjectId test-user-1105@uhgdev.onmicrosoft.com 
+Get-azureaduser -ObjectId test-user-1103@$orgname.onmicrosoft.com | fl 
+Get-azureaduser -ObjectId test-user-1105@$orgname.onmicrosoft.com | fl 
+$user = Get-azureaduser -ObjectId test-user-1105@$orgname.onmicrosoft.com 
 $user | fl
 $user.tojson()
 $user | fl | clip
 $user.ShowInAddressList
 
-$aadUser = Get-PnPAzureADUser -Identity test-user-1104@uhgdev.onmicrosoft.com -Select AdditionalProperties
+$aadUser = Get-PnPAzureADUser -Identity test-user-1104@$orgname.onmicrosoft.com -Select AdditionalProperties
 $aadUser.AdditionalProperties["AdditionalData"]
 
 
-Set-AzureADUser -ObjectId test-user-1105@uhgdev.onmicrosoft.com -ShowInAddressList $false
-Set-AzureADUser -ObjectId test-user-1105@uhgdev.onmicrosoft.com -ShowInAddressList 1
+Set-AzureADUser -ObjectId test-user-1105@$orgname.onmicrosoft.com -ShowInAddressList $false
+Set-AzureADUser -ObjectId test-user-1105@$orgname.onmicrosoft.com -ShowInAddressList 1
 
-Set-AzureADUser -ObjectId test-user-1106@uhgdev.onmicrosoft.com -ShowInAddressList $false
-Set-AzureADUser -ObjectId test-user-1106@uhgdev.onmicrosoft.com -ShowInAddressList $true
+Set-AzureADUser -ObjectId test-user-1106@$orgname.onmicrosoft.com -ShowInAddressList $false
+Set-AzureADUser -ObjectId test-user-1106@$orgname.onmicrosoft.com -ShowInAddressList $true
 
 Get-AzureADApplication | Get-AzureADApplicationExtensionProperty
 
 # Az
 Connect-AzAccount -ApplicationId $clientId -CertificateThumbprint $certThumbprint -Tenant $tenantId 
 Get-AzADUser
-Get-AzADUser -UserPrincipalName test-user-1100@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
-Get-AzADUser -UserPrincipalName test-user-1101@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
-Get-AzADUser -UserPrincipalName test-user-1102@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
-Get-AzADUser -UserPrincipalName test-user-1103@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
-Get-AzADUser -UserPrincipalName test-user-1104@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
-Get-AzADUser -UserPrincipalName test-user-1105@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
-Get-AzADUser -UserPrincipalName test-user-1106@uhgdev.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1100@$orgname.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1101@$orgname.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1102@$orgname.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1103@$orgname.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1104@$orgname.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1105@$orgname.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 
+Get-AzADUser -UserPrincipalName test-user-1106@$orgname.onmicrosoft.com -Select ShowInAddressList -AppendSelected | Select-Object UserPrincipalName, ShowInAddressList 

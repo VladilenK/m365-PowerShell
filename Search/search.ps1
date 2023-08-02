@@ -1,10 +1,10 @@
 
-$adminUrl = "https://uhgdev-admin.sharepoint.com"
+$adminUrl = "https://$orgname-admin.sharepoint.com"
 $connectionAdmin = Connect-PnPOnline -Url $adminUrl -ClientId $clientid -ClientSecret $clientSc -ReturnConnection
 $connectionAdmin.Url
 
 
-$siteUrl = "https://uhgdev.sharepoint.com/teams/test-21"
+$siteUrl = "https://$orgname.sharepoint.com/teams/test-21"
 $connectionSite = Connect-PnPOnline -Url $siteUrl -ClientId $clientid -ClientSecret $clientSc -ReturnConnection
 $connectionSite.Url
 

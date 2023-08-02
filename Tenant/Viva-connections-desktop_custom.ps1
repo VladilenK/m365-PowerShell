@@ -7,7 +7,7 @@ Write-Host "Please ensure you have SharePoint admin privileges in your tenant be
 # Get SharePoint Portal link from user
 # 'Enter the link of the SharePoint portal that you want to pin in Teams. 
 #  Please ensure that it is a modern Communication site. We recommend that you use a Home Site'
-[uri]$configUrl = "https://uhgdev.sharepoint.com/"
+[uri]$configUrl = "https://$orgname.sharepoint.com/"
 [string]$domain = $configUrl.Host
 $hostElement = $domain.Split(".")[0]
 

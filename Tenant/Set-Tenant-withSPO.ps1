@@ -23,7 +23,7 @@ Get-SPOHubSite | ft -a SiteUrl, Title
 
 # Org News Sites
 Get-SPOOrgNewsSite
-Set-SPOOrgNewsSite -OrgNewsSiteUrl "https://uhgdev.sharepoint.com/sites/contoso-marketing" 
+Set-SPOOrgNewsSite -OrgNewsSiteUrl "https://$orgname.sharepoint.com/sites/contoso-marketing" 
 
 # organization assets library
 Get-SPOOrgAssetsLibrary

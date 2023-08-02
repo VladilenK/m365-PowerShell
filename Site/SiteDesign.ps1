@@ -1,5 +1,5 @@
 
-$siteUrl = "https://uhgdev.sharepoint.com/sites/Birding_in_KZ"
+$siteUrl = "https://$orgname.sharepoint.com/sites/Birding_in_KZ"
 $site = Get-SPOSite -Identity $siteUrl
 
 $site.Template

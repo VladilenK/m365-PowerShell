@@ -1,4 +1,4 @@
-# Vladilen@uhgdev.onmicrosoft.com
+# Vladilen@$orgname.onmicrosoft.com
 
 $PSVersionTable # must be 5.1 x64
 Get-Module AzureAD -ListAvailable

@@ -4,8 +4,8 @@
 $timeStart = Get-Date
 1..12 | ForEach-Object {
     $title = "Test-LastModDate-{0:000}" -f $_
-    $Url = "https://uhgdev.sharepoint.com/sites/Test-Parallel-{0:000}" -f $_
-    $owner = "vladilen@uhgdev.onmicrosoft.com"
+    $Url = "https://$orgname.sharepoint.com/sites/Test-Parallel-{0:000}" -f $_
+    $owner = "vladilen@$orgname.onmicrosoft.com"
     New-PnPTenantSite -Title $title -Url $url -Owner $adminUPN -Template "STS#3" -TimeZone "6" 
 }
 $timeFinish = Get-Date

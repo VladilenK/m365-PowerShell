@@ -2,14 +2,14 @@ Get-Command *scop* -Module PnP.PowerShell
 
 $connection
 
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Ext-02-Internal-Only-Policy"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Ext-01-None"
-$siteUrl = "https://uhgdev.sharepoint.com/sites/ContosoHub"
-$siteUrl = "https://uhgdev.sharepoint.com/sites/test-Ext-05-Standalone-Site"
-$siteUrl = "https://uhgdev.sharepoint.com/teams/Test-Parallel-000"
-$siteUrl = "https://uhgdev.sharepoint.com/sites/Birding_in_KZ"
-$siteUrl = "https://uhgdev.sharepoint.com/sites/TestCommSite_01"
-$siteUrl = "https://uhgdev.sharepoint.com/sites/TestCommSite_01/SubSite_01"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-Ext-02-Internal-Only-Policy"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-Ext-01-None"
+$siteUrl = "https://$orgname.sharepoint.com/sites/ContosoHub"
+$siteUrl = "https://$orgname.sharepoint.com/sites/test-Ext-05-Standalone-Site"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-Parallel-000"
+$siteUrl = "https://$orgname.sharepoint.com/sites/Birding_in_KZ"
+$siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01"
+$siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01/SubSite_01"
 
 $pnpTenantSite = Get-PnPTenantSite -Identity $siteUrl -Detailed -Connection $connection
 $pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel, Owner | fl

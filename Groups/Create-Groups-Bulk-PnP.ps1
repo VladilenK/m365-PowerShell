@@ -5,17 +5,17 @@
 $timeStart = Get-Date
 101..2500 | ForEach-Object -Parallel {
     $title = "Test-Ownerless-Policy-{0:00000}" -f $_
-    $Url = "https://uhgdev.sharepoint.com/teams/" + $title
-    $owner = "user2del5@uhgdev.onmicrosoft.com"
+    $Url = "https://$orgname.sharepoint.com/teams/" + $title
+    $owner = "user2del5@$orgname.onmicrosoft.com"
     $members = @()
-    $members += 'Roger.K.Barrett@uhgdev.onmicrosoft.com'
-    $members += 'Richard.W.Wright@uhgdev.onmicrosoft.com'
-    $members += 'Robert.Dylan@uhgdev.onmicrosoft.com'
-    $members += 'user33@uhgdev.onmicrosoft.com'
-    $members += 'S.Lem@uhgdev.onmicrosoft.com'
-    $members += 'David.Aaronson@uhgdev.onmicrosoft.com'
+    $members += 'Roger.K.Barrett@$orgname.onmicrosoft.com'
+    $members += 'Richard.W.Wright@$orgname.onmicrosoft.com'
+    $members += 'Robert.Dylan@$orgname.onmicrosoft.com'
+    $members += 'user33@$orgname.onmicrosoft.com'
+    $members += 'S.Lem@$orgname.onmicrosoft.com'
+    $members += 'David.Aaronson@$orgname.onmicrosoft.com'
     $mbrs = $members | Get-Random -Count 3
-    # $mbrs += "Vlad@uhgdev.onmicrosoft.com"
+    # $mbrs += "Vlad@$orgname.onmicrosoft.com"
     New-PnPMicrosoft365Group -DisplayName $title -MailNickname $title -Description $title -Owners $owner -Members $mbrs -IsPrivate -CreateTeam:$true -ResourceBehaviorOptions WelcomeEmailDisabled, HideGroupInOutlook 
 } -ThrottleLimit 20
 $timeFinish = Get-Date

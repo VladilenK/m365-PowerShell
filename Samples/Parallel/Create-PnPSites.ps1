@@ -19,7 +19,7 @@ $timeStart = Get-Date
     $conn = $using:connectionAdminInteractive
     $title = "Test-Parallel-{0:000}" -f $_
     $alias = "Test-Parallel-{0:000}" -f $_
-    $Url = "https://uhgdev.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
+    $Url = "https://$orgname.sharepoint.com/teams/Test-Parallel-{0:000}" -f $_
     # New-PnPSite -Type TeamSite -Title $title -Alias $alias -Connection $conn
     New-PnPSite -Type TeamSiteWithoutMicrosoft365Group -Title $title -Url $url -Connection $conn
     if ($?) { Write-Host "*" -ForegroundColor Green } else { Write-Host "0" -ForegroundColor Yellow }
