@@ -44,3 +44,4 @@ New-MgGroupOwner -GroupId $groupId -DirectoryObjectId $userId
 
 
 
+

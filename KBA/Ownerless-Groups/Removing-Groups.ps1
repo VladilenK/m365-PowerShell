@@ -28,4 +28,9 @@ foreach ($group in $groupsToDelete) {
 }
 
 
+# Delete group
+# add Owner to the group
+$groupId = '443d22ae-683a-4fe4-8875-7bd78227a026'
+Remove-MgGroup -GroupId $groupId
+
 
