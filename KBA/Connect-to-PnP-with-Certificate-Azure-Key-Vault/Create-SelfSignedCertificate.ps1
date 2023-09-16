@@ -4,11 +4,14 @@ $certStoreLocation = "Cert:\CurrentUser\My"
 $cert = New-SelfSignedCertificate -Subject $subj -CertStoreLocation $certStoreLocation -KeyExportPolicy Exportable -KeySpec Signature -FriendlyName $friendlyName -KeyUsage DigitalSignature
 $cert | fl
 $cert.FriendlyName
+$cert.NotAfter
 
-$filePathCer = "$Home\code\certificates\cert004.cer"
+$filePath = "$Home\code\certificates\"
+$filePath = "$Home\Documents\keys\Certificates\"
+$filePathCer = $filePath + "cert005.cer"
+$filePathPfx = $filePath + "cert005.pfx"
 Export-Certificate -Cert $cert -FilePath $filePathCer -Type CERT
-$filePathPfx = "$Home\code\certificates\cert004.pfx"
-$certPwd = ConvertTo-SecureString -String "12345" -Force -AsPlainText
+$certPwd = ConvertTo-SecureString -String "Q1w2e3r4t5" -Force -AsPlainText
 Export-PfxCertificate -Cert $cert -FilePath $filePathPfx -Password $certPwd
 
 # Manually (with GUI): 
