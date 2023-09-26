@@ -25,6 +25,7 @@ Update-Module -Name PnP.PowerShell -Scope CurrentUser -Force
 
 Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force -RequiredVersion 1.12.0
 Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force -RequiredVersion 2.1.1
+Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force 
 
 Find-Module PnP.PowerShell | Install-Module -AllowClobber -Scope CurrentUser
 
