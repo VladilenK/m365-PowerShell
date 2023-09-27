@@ -22,7 +22,7 @@ $groups | ForEach-Object -Parallel {
 $timeFinish = Get-Date
 $timeElapsed = $timeFinish - $timeStart
 $timeElapsed.TotalSeconds
-"{0:000.0}" -f ($timeElapsed.TotalSeconds / ($groups.Count))
+"{0:000.000}" -f ($timeElapsed.TotalSeconds / ($groups.Count/1000))
 
 
 
