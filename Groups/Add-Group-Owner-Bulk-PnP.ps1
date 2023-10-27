@@ -15,8 +15,8 @@ $groups.count
 
 $timeStart = Get-Date
 $groups | ForEach-Object -Parallel {
-    Write-Host $_.DisplayName
-    $owner = "user2del27@vladslab.onmicrosoft.com"
+    # Write-Host $_.DisplayName
+    $owner = "user2del26@uhgdev.onmicrosoft.com"
     Add-PnPMicrosoft365GroupOwner  -Identity $_.Id -Users $owner
 } -ThrottleLimit 50
 $timeFinish = Get-Date

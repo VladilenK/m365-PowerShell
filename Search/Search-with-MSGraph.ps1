@@ -13,6 +13,8 @@ $Headers = @{
 Invoke-RestMethod -Uri 'https://graph.microsoft.com/v1.0/me' -Headers $Headers
 
 # search
+$query = "*"
+$query = "LastModifiedTimeForRetention<2021-01-01"
 $apiUrl = "https://graph.microsoft.com/beta/search/query"
 $body = @"
 { 
@@ -22,7 +24,7 @@ $body = @"
         "driveItem"
       ],
       "query": {
-        "queryString": "test"
+        "queryString": "$query"
       }
     }
   ]

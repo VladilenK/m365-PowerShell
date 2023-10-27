@@ -2,7 +2,7 @@
 $clientSiteId
 $AccessToken.Substring(0, 3)
 $sitePath
-$clientId
+$clientAppClientId
 $clientAppName
 
 # specify app role
@@ -17,7 +17,7 @@ $postBody = @"
   'roles': $rolesJson,
   'grantedToIdentities': [{
     'application': {
-      'id': '$clientId',
+      'id': '$clientAppClientId',
       'displayName': '$clientAppName'
     }
   }]

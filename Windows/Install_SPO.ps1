@@ -1,10 +1,12 @@
 ﻿# https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-online/connect-sharepoint-online?view=sharepoint-ps
 
 Get-InstalledModule -Name Microsoft.Online.SharePoint.PowerShell
+Get-Module Microsoft.Online.SharePoint.PowerShell | ft -a
 Get-Module Microsoft.Online.SharePoint.PowerShell -ListAvailable | ft -a
 Find-Module Microsoft.Online.SharePoint.PowerShell | ft -a
-Install-Module Microsoft.Online.SharePoint.PowerShell   #-Force 
+Install-Module Microsoft.Online.SharePoint.PowerShell -Force 
 
+Remove-Module Microsoft.Online.SharePoint.PowerShell 
 Import-Module Microsoft.Online.SharePoint.PowerShell
 Import-Module Microsoft.Online.SharePoint.PowerShell –force
 Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking

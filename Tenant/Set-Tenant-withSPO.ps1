@@ -1,5 +1,23 @@
-﻿Connect-SPOService -Url "" 
-Get-SPOTenant
+﻿# PowerShell 5
+
+Connect-SPOService -Url $adminUrl -ModernAuth:$true 
+Get-SPOTenant 
+
+return
+
+# ACS
+$tenant = Get-SPOtenant 
+$tenant.SiteOwnerManageLegacyServicePrincipalEnabled # False
+$tenant.LegacyAuthProtocolsEnabled # True
+$tenant.LegacyBrowserAuthProtocolsEnabled # True
+$tenant.BlockAppAccessWithAuthenticationContext # False
+$tenant.DisableCustomAppAuthentication # False
+
+Set-SPOTenant -SiteOwnerManageLegacyServicePrincipalEnabled $true 
+Set-SPOTenant -SiteOwnerManageLegacyServicePrincipalEnabled $false
+
+Set-SPOTenant -DisableCustomAppAuthentication $false
+
 
 # CDN
 Get-SPOTenantCdnEnabled -CdnType Public
