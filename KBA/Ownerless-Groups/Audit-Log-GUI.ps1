@@ -1,4 +1,5 @@
 $auditLog = Import-Csv -Path "C:\Users\Vlad\Downloads\Ownerless-Groups.csv"
+$auditLog = Import-Csv -Path "$Home\Downloads\ownerlessgroupnotified.csv"
 $auditLog.count
 
 $auditLog_OwnerlessGroupNotified = $auditLog | ? { $_.Operation -eq "OwnerlessGroupNotified" }
