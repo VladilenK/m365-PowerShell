@@ -1,11 +1,13 @@
-﻿[Net.ServicePointManager]::SecurityProtocol = "tls12"
-powershell.exe -NoLogo -NoProfile -Command 'Install-Module -Name PackageManagement -Force -MinimumVersion 1.4.6 -Scope CurrentUser -AllowClobber'
+﻿# [Net.ServicePointManager]::SecurityProtocol = "tls12"
+# powershell.exe -NoLogo -NoProfile -Command 'Install-Module -Name PackageManagement -Force -MinimumVersion 1.4.6 -Scope CurrentUser -AllowClobber'
 
 
 ###################################################################################################
 # PnP.PowerShell 
 Get-InstalledModule -Name PnP.PowerShell -AllVersions
+Get-Module -Name PnP.PowerShell -ListAvailable 
 Find-Module PnP.PowerShell
+Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force 
 
 Get-Module -ListAvailable | ? { $_.Name -like "*pnp*" }
 Get-Module -Name PnP.PowerShell 
@@ -25,7 +27,6 @@ Update-Module -Name PnP.PowerShell -Scope CurrentUser -Force
 
 Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force -RequiredVersion 1.12.0
 Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force -RequiredVersion 2.1.1
-Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force 
 
 Find-Module PnP.PowerShell | Install-Module -AllowClobber -Scope CurrentUser
 
