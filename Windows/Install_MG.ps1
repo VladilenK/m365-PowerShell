@@ -6,6 +6,10 @@ Find-Module -Command 'get-mggroup'
 
 Find-Module -Name Microsoft.Graph
 
+Find-Module -Name Microsoft.Graph.Search
+Install-Module -Name Microsoft.Graph.Search
+
+
 Find-Module -Name Microsoft.Graph.Groups
 Install-Module -Name Microsoft.Graph.Groups
 
