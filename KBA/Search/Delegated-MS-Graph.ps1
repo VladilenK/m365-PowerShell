@@ -16,6 +16,7 @@ Invoke-RestMethod -Uri 'https://graph.microsoft.com/v1.0/me' -Headers $Headers
 # Search
 $entityTypes = "['driveItem','listItem','list','drive','site']"
 $entityTypes = "['listItem']"
+$entityTypes = "['chatMessage']"
 
 $query = "LastModifiedTimeForRetention<2021-01-01"
 $apiUrl = "https://graph.microsoft.com/beta/search/query"

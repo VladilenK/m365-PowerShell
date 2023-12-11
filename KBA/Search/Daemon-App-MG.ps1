@@ -1,11 +1,15 @@
 # Prerequisites
+# app with Sites.Read.All Graph API application permissions 
+# Microsoft.Graph PowerShell module
 Get-Module Microsoft.Graph.Authentication -ListAvailable | ft name, Version, Path 
 
 # Authentication
-$clientid = '31359c7f-bd7e-475c-86db-fdb8c937548e'
-$clientid = 'd82858e0-ed99-424f-a00f-cef64125e49c'
-$TenantId = '7ddc7314-9f01-45d5-b012-71665bb1c544'
-Connect-MgGraph -ClientId $clientid -TenantId $TenantId
+$clientID
+$certThumbprint
+$TenantId 
+Connect-MgGraph -ClientId $clientid -TenantId $TenantId -CertificateThumbprint $certThumbprint
+
+# Get-MgSite -Top 5
 
 # Search
 $params = @{
@@ -23,6 +27,7 @@ $params = @{
 				"title"
 				"description"
 			)
+      region = "NAM"
 		}
 	)
 }
