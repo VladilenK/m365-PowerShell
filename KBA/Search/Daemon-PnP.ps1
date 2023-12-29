@@ -20,8 +20,8 @@ $res = Submit-PnPSearchQuery -Query $query -All
 $query = "* site:https://s5dz3.sharepoint.com/teams/sxcdvbxcvbxvcxcv"
 $res = Submit-PnPSearchQuery -Query $query 
 
-$query = "test*"
 $query = "test* site:https://s5dz3.sharepoint.com/teams/sxcdvbxcvbxvcxcv"
+$query = "test*"
 $res = Submit-PnPSearchQuery -Query $query -SortList @{"LastModifiedTime" = "ascending"} 
 
 

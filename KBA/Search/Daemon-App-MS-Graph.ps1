@@ -3,15 +3,15 @@
 
 ########################################################
 # Authentication
-$TenantId 
-$clientID
-$clientSc.Substring(0,3)
+$tenantId = '7ddc7314-9f01-45d5-b012-71665bb1c544'
+$clientId = 'aceed4f0-1fc0-487d-90d1-6ed9cafb2541'
+$clientSecret = '1LV8Q~_YEP0SR1CrrqBSU.kMUP3DjXGbSWo7obUz' # 81d71e25-17c4-4ed4-be2b-5173c9084170
 
 # Construct URI and body needed for authentication
 $uri = "https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token"
 $body = @{
     client_id     = $clientID
-    client_secret = $clientSc
+    client_secret = $clientSecret
     scope         = "https://graph.microsoft.com/.default"
     grant_type    = "client_credentials" 
 }
@@ -26,12 +26,13 @@ $headers = @{Authorization = "Bearer $token" }
 $headers
 
 # Search
-$entityTypes = "['driveItem','listItem','list','drive','site']"
-$entityTypes = "['driveItem','listItem']"
-
-$query = "LastModifiedTimeForRetention<2021-01-01"
 $apiUrl = "https://graph.microsoft.com/beta/search/query"
+
 $query = "test*"
+
+$entityTypes = "['driveItem','listItem','list','drive','site']"
+$entityTypes = "['listItem']"
+
 $body = @"
 { 
   "requests": [
@@ -46,23 +47,28 @@ $body = @"
 }
 "@
 
+
 $res = Invoke-RestMethod -Headers $Headers -Uri $apiUrl -Body $Body -Method Post -ContentType 'application/json'
 $res.value[0].searchTerms
 $res.value[0].hitsContainers[0].hits.Count
 $res.value[0].hitsContainers[0].hits
+$res.value[0].hitsContainers[0].hits.resource.webUrl
 $res.value[0].hitsContainers[0].hits[0] | fl
 $res.value[0].hitsContainers[0].hits[0].resource
 $res.value[0].hitsContainers[0].hits[0].resource.lastModifiedBy.user
 
 
 ######
-$entityTypes = "['driveItem','listItem','list','drive','site']"
+$apiUrl = "https://graph.microsoft.com/beta/search/query"
+
+$query = "LastModifiedTimeForRetention<2023-08-01"
+$query = "lorem* AND isDocument=true site:https://s5dz3.sharepoint.com/sites/SalesandMarketing"
+$query = "test*"
+
 $entityTypes = "['chatMessage']"
 $entityTypes = "['driveItem']"
+$entityTypes = "['driveItem','listItem','list','drive','site']"
 
-$query = "LastModifiedTimeForRetention<2023-12-10"
-$apiUrl = "https://graph.microsoft.com/beta/search/query"
-$query = "test* AND isDocument=true"
 $body = @"
 { 
   "requests": [
@@ -71,19 +77,31 @@ $body = @"
       "query": {
         "queryString": "$query"
       },
-      "from" : 0,
-			"size" : 5,
+      "region": "NAM",
+      "from" : 100,
+      "size" : 50,
       "fields": ["WebUrl","lastModifiedBy","name" ],
-      "region": "NAM"
     }
   ]
 }
 "@
 $res = Invoke-RestMethod -Headers $Headers -Uri $apiUrl -Body $Body -Method Post -ContentType 'application/json'
 $res.value[0].searchTerms
+
+
 $res.value[0].hitsContainers[0].hits.Count
 $res.value[0].hitsContainers[0].hits
 $res.value[0].hitsContainers[0].hits[0] | fl
+$res.value[0].hitsContainers[0].hits[1] | fl
 $res.value[0].hitsContainers[0].hits[0].resource
 $res.value[0].hitsContainers[0].hits[0].resource.lastModifiedBy.user
+$res.value[0].hitsContainers[0].hits[0].resource.lastModifiedDateTime
+$res.value[0].hitsContainers[0].hits.resource.lastModifiedDateTime
 $res.value[0].hitsContainers[0].hits.resource.weburl
+
+# to check if there are more results to return for paging
+$res.value[0].hitsContainers[0].moreResultsAvailable
+
+# ,"region": "NAM"
+# 
+
