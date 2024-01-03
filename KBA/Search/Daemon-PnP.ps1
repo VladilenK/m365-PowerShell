@@ -2,9 +2,10 @@
 Get-Module PnP.PowerShell -ListAvailable
 
 # Authentication
-$clientID
-$certThumbprint
-$TenantId 
+$tenantId = '7ddc7314-9f01-45d5-b012-71665bb1c544'
+$clientId = 'aceed4f0-1fc0-487d-90d1-6ed9cafb2541'
+$certThumbprint = '160AE9107C82821A326363D4BCA82C1707C226B3'
+
 $siteUrl = "https://s5dz3.sharepoint.com"
 Connect-PnPOnline -ClientId $clientid -Tenant $TenantId -Url $siteUrl -Thumbprint $certThumbprint
 (Get-PnPConnection).Url
@@ -12,22 +13,16 @@ Connect-PnPOnline -ClientId $clientid -Tenant $TenantId -Url $siteUrl -Thumbprin
 # search
 $query = "test*"
 $res = Submit-PnPSearchQuery -Query $query 
+$res.ResultRows.Count
+
 $res = Submit-PnPSearchQuery -Query $query -MaxResults 5
+$res.ResultRows.Count
 
 $query = "* contentclass:STS_ListItem_DocumentLibrary author:Patti"
 $res = Submit-PnPSearchQuery -Query $query -All 
-
-$query = "* site:https://s5dz3.sharepoint.com/teams/sxcdvbxcvbxvcxcv"
-$res = Submit-PnPSearchQuery -Query $query 
-
-$query = "test* site:https://s5dz3.sharepoint.com/teams/sxcdvbxcvbxvcxcv"
-$query = "test*"
-$res = Submit-PnPSearchQuery -Query $query -SortList @{"LastModifiedTime" = "ascending"} 
-
-
 $res.ResultRows.Count
+
+$res
 $res.ResultRows[0]
 $res.ResultRows.Title
-$res.ResultRows.OriginalPath
-$res.ResultRows.LastModifiedTime
 
