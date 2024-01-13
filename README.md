@@ -7,4 +7,6 @@ use responsibly, on your own risk
 you should review scipt and understand it very well before running it
 
 
-My Blog Articles on the subject (Using PowerShell to manage SharePoint Online)[https://vladilen.com/tag/powershell/]
+My Blog Articles on the subject
+- [Using PowerShell to manage SharePoint Online](https://vladilen.com/tag/powershell/)
+- [Using Microsoft Graph API with SharePoint](https://vladilen.com/tag/microsoft-graph-api/)
