@@ -5,7 +5,7 @@
 # Authentication
 $tenantId = '7ddc7314-9f01-45d5-b012-71665bb1c544'
 $clientId = 'aceed4f0-1fc0-487d-90d1-6ed9cafb2541'
-$clientSecret = '1LV8Q~_YEP0SR1CrrqBSU.kMUP3DjXGbSWo7obUz' # 81d71e25-17c4-4ed4-be2b-5173c9084170
+$clientSecret = '' # 81d71e25-17c4-4ed4-be2b-5173c9084170
 
 # Construct URI and body needed for authentication
 $uri = "https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token"
