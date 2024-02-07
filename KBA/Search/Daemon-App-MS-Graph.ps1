@@ -3,8 +3,8 @@
 
 ########################################################
 # Authentication
-$tenantId = '7ddc7314-9f01-45d5-b012-71665bb1c544'
-$clientId = 'aceed4f0-1fc0-487d-90d1-6ed9cafb2541'
+$tenantId = ''
+$clientId = ''
 $clientSecret = '' #
 
 # Construct URI and body needed for authentication
