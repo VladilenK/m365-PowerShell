@@ -34,17 +34,17 @@ $entityTypes = "['driveItem','listItem','list','drive','site']"
 $entityTypes = "['listItem']"
 
 $body = @"
-{ 
-  "requests": [
-    {
-      "entityTypes": $entityTypes,
-      "query": {
-        "queryString": "$query"
-      },
-      "region": "NAM"
-    }
-  ]
-}
+  { 
+    "requests": [
+      {
+        "entityTypes": $entityTypes,
+        "query": {
+          "queryString": "$query"
+        },
+        "region": "NAM"
+      }
+    ]
+  }
 "@
 
 

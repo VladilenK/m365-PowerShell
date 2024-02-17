@@ -1,0 +1,1 @@
+## calling MS Graph API with application credentials from PowerShell 
