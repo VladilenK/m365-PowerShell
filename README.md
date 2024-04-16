@@ -1,11 +1,8 @@
 # PowerShell Scripts
+## to administer and support Microsoft 365 SharePoint, Teams, Search, Azure
 
-to administer and support Microsoft 365 SharePoint
-
-use responsibly, on your own risk
-
-you should review scipt and understand it very well before running it
-
+Use responsibly, on your own risk
+You should review scipt, understand it very well and test it in nonprod environment before running it in prod
 
 My Blog Articles on the subject
 - [Using PowerShell to manage SharePoint Online](https://vladilen.com/tag/powershell/)
