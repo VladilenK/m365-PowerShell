@@ -18,9 +18,11 @@ Get-Module Microsoft.Graph.Authentication
 Get-Module Microsoft.Graph.Authentication -ListAvailable | ft name, Version, Path 
 UnInstall-Module -Name Microsoft.Graph.Authentication -AllVersions
 
-Install-Module -Name Microsoft.Graph.Sites
-Install-Module -Name Microsoft.Graph.Reports
-Install-Module -Name Microsoft.Graph.Identity
+Install-Module -Force -Name Microsoft.Graph.Authentication 
+Install-Module -Force -Name Microsoft.Graph.Identity 
+Install-Module -Force -Name Microsoft.Graph.Sites 
+Install-Module -Force -Name Microsoft.Graph.Reports
+Install-Module -Force -Name Microsoft.Graph.Groups
 
 Get-Module Microsoft.Graph.* -ListAvailable | ft name, Version, Path 
 

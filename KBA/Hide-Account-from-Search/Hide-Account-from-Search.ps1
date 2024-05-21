@@ -40,8 +40,9 @@ foreach ($upn in $upns) {
     $azAdUser | Select-Object UserPrincipalName, AccountEnabled, ShowInAddressList
 }
 
-Set-AzADUser -UPNOrObjectId  $upns[0] -ShowInAddressList:$false
-Set-AzADUser -UPNOrObjectId  $upns[1] -ShowInAddressList:$false
-Set-AzADUser -UPNOrObjectId  $upns[2] -ShowInAddressList:$true
+Update-AzADUser -UPNOrObjectId  $upns[0] -ShowInAddressList:$true
+Update-AzADUser -UPNOrObjectId  $upns[0] -ShowInAddressList:$false
+Update-AzADUser -UPNOrObjectId  $upns[1] -ShowInAddressList:$false
+Update-AzADUser -UPNOrObjectId  $upns[2] -ShowInAddressList:$true
 
 
