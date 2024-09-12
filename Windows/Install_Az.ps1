@@ -5,8 +5,8 @@ Get-Module Az -ListAvailable
 Get-Module Az -ListAvailable | ft name, Version, Path 
 Find-Module Az
 
-Install-Module -Name Az -AllowClobber -Scope CurrentUser -Force
-Install-Module -Name Az -AllowClobber -Scope AllUsers 
+Install-Module -Name Az -Scope CurrentUser -Force  -AllowClobber
+Install-Module -Name Az -Scope AllUsers   -AllowClobber
 
 Import-Module Az -RequiredVersion 5.7.0
 
@@ -27,7 +27,7 @@ Get-Module Az.Account
 Get-Module Az.Account  -ListAvailable 
 Find-Module Az.Account
 
-Install-Module -Name Az.Account -AllowClobber -Scope CurrentUser
+Install-Module -Name Az.Account -Scope CurrentUser -AllowClobber 
 
 Import-Module Az -RequiredVersion 5.7.0
 

@@ -4,8 +4,6 @@ $allsites = Get-PnPTenantSite -Connection $connAdmin
 $allsites.Count
 $urls = $allsites | Select-Object -Property Url -ExpandProperty Url
 
-
-
 $standaloneSites = Get-PnPTenantSite -GroupIdDefined:$false -Connection $connAdmin
 $standaloneSites.count
 
@@ -24,20 +22,4 @@ $urls = $standaloneSites | Select-Object -Property Url -ExpandProperty Url
 $urls += $privateGroups  | Select-Object -Property Url -ExpandProperty SiteUrl
 $urls.count
 $urls[0]
-
-
-$sites2del | Select-Object -first 200
-$sites2del | Select-Object -last 200
-$sites2del.count
-
-$sites2del = $sites2del | Select-Object -First 5010
-$sites2del = $sites2del | Select-Object -skip 2
-$sites2del = $standaloneSites | Select-Object -Skip 4
-
-$connAdmin
-$sites2del | ForEach-Object -Parallel {
-    $conn = $using:connAdmin
-    Write-Host $_.Url
-    Remove-PnPTenantSite -Url $_.Url -Connection $conn -Force:$true 
-} -ThrottleLimit 20
 

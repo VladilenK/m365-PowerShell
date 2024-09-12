@@ -8,7 +8,8 @@ $sourcePath = "J:\IT-Learning-Videos"   # original "do no touch" files
 $sourcePath = "J:\Music"   # original "do no touch" files
 $sourcePath = "J:\Music.My"   # original "do no touch" files
 $sourcePath = "J:\Music.My"   # original "do no touch" files
-$sourcePath = "J:\_Photos"   # original "do no touch" files
+$sourcePath = "M:\_Photos"   # original "do no touch" files
+$sourcePath = "M:\_Scan\_CoolScan_sorted"   # original "do no delete" files
 
 # $deduplPath = "U:\_Photos.bak.2" # files to clean-up - remove duplications
 $deduplPath = "U:\Stage" # files to clean-up - remove duplications
@@ -18,7 +19,8 @@ $deduplPath = "D:\Audiobooks" # files to clean-up - remove duplications
 $deduplPath = "D:\books" # files to clean-up - remove duplications
 $deduplPath = "D:\Learning" # files to clean-up - remove duplications
 $deduplPath = "D:\Music" # files to clean-up - remove duplications
-$deduplPath = "J:\_Photos.All" # files to clean-up - remove duplications
+$deduplPath = "M:\_Photos.All" # files to clean-up - remove duplications
+$deduplPath = "M:\_Scan\_CoolScan" # files to clean-up - remove duplications
 
 Write-Host "Source files count, GB"
 $sourceFiles = Get-ChildItem -Path $sourcePath -Recurse -Attributes !Directory # -Include "*.mov"
@@ -62,8 +64,8 @@ $timing = '{0} elements checked in {1:n1} seconds'
 $timing -f $deduplFiles.Count, $stopwatch.Elapsed.TotalSeconds
 
 Write-Host "Duplications removed:"
-$removedFiles.count
-($removedFiles | Measure-Object -Property Length -Sum ).sum/1000000
+Write-Host " Files count: " $removedFiles.count
+Write-Host " MBs: "  (($removedFiles | Measure-Object -Property Length -Sum ).sum/1000000)
 Write-Host "Out of total to check for duplications:"
 $deduplFiles.count
 ($deduplFiles | Measure-Object -Property Length -Sum).Sum/1000000 

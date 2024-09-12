@@ -30,7 +30,8 @@ Set-PnPUserProfileProperty -Account $loginUPN -PropertyName 'SPS-HideFromAddress
 ##############################################################################################################
 # Azure 
 DisConnect-AzAccount 
-Connect-AzAccount 
+Connect-AzAccount -AccountId "VladK@vladev.xyz" 
+Connect-AzAccount -AccountId "Vlad@u2b.dev" 
 
 $azADUser = Get-AzADUser -UserPrincipalName $upns[0]
 $azADUser.ShowInAddressList
@@ -44,5 +45,11 @@ Update-AzADUser -UPNOrObjectId  $upns[0] -ShowInAddressList:$true
 Update-AzADUser -UPNOrObjectId  $upns[0] -ShowInAddressList:$false
 Update-AzADUser -UPNOrObjectId  $upns[1] -ShowInAddressList:$false
 Update-AzADUser -UPNOrObjectId  $upns[2] -ShowInAddressList:$true
+
+
+##########################
+$upns = @()
+$upns += "Vlad@u2b.dev" 
+
 
 

@@ -1,3 +1,8 @@
+# app with delegated permissions "Sites.Read.All"
+# account with no permissions to SharePoint
+# 
+# $urls - list of sites Url to check (see get-sites.ps1)
+
 $urls.count
 $url = $urls[-1]; $url
 
@@ -19,6 +24,6 @@ $resultWebUrlsUnique = $resultWebUrls | Sort-Object -Unique
 $resultWebUrlsUnique.count
 
 
-$token = Get-MsalToken -ClientId $clientid -TenantId $tenantId -Interactive
-$token = Get-MsalToken -ClientId $clientid -TenantId $tenantId -ForceRefresh -Silent
+# $token = Get-MsalToken -ClientId $clientid -TenantId $tenantId -Interactive
+# $token = Get-MsalToken -ClientId $clientid -TenantId $tenantId -ForceRefresh -Silent
 

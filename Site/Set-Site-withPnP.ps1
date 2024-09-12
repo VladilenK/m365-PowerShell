@@ -10,6 +10,8 @@ $siteUrl = "https://$orgname.sharepoint.com/teams/Test-Parallel-000"
 $siteUrl = "https://$orgname.sharepoint.com/sites/Birding_in_KZ"
 $siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01"
 $siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01/SubSite_01"
+$siteUrl = "https://$orgname.sharepoint.com/sites/Test-Sites-Selected"
+$siteUrl = "https://$orgname.sharepoint.com/teams/TestTeam_03"
 
 $pnpTenantSite = Get-PnPTenantSite -Identity $siteUrl -Detailed -Connection $connection
 $pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel, Owner | fl
@@ -51,5 +53,8 @@ Get-PnPFeature -Identity 41e1d4bf-b1a2-47f7-ab80-d5d6cbba3092 -Connection $siteC
 Enable-PnPFeature -Identity 41e1d4bf-b1a2-47f7-ab80-d5d6cbba3092   -Connection $siteConnection
 
 
+# rename site
+Get-PnPTenantSite -Identity $siteUrl -Connection $connection | ft -a Title 
+Set-PnPTenantSite -Identity $siteUrl -Connection $connection -Title "TestTeam_03 [renamed]"
 
 
