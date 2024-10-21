@@ -6,6 +6,7 @@ $sourcePath = "D:\_Photos_backup"   # original "do no touch" files
 $sourcePath = "U:\_Photos"   # original "do no touch" files
 $sourcePath = "D:\"   # original "do no touch" files
 $sourcePath = "M:\DVR\DVR4-Voifo"   # original "do no touch" files
+$sourcePath = "D:\_Videos.mix"   # original "do no touch" files
 
 Write-Host "Source files in $sourcePath : count, GB"
 $allSourceFiles = Get-ChildItem -Path $sourcePath -Recurse -Attributes !Directory # -Include "*.mov"
