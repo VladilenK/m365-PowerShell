@@ -42,7 +42,17 @@ Update-Module Az.Resources
 Remove-Module Az.Resources
 Import-Module Az.Resources
 
+#############################################################################################
+# KeyVault
+$moduleName = "Az.KeyVault"
 
+Find-Module $moduleName
+Get-InstalledModule -Name $moduleName
+Get-InstalledModule -Name Az -AllVersions | Select-Object -Property Name, Version
+Get-Module Az.Account  
+Get-Module Az.Account  -ListAvailable 
+
+#############################################################################################
 
 
 
