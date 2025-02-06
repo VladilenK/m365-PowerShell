@@ -8,6 +8,8 @@ $cert.FriendlyName
 $filePath = "C:\cert006.pfx"
 $filePath = "C:\Users\Vlad\OneDrive\archive\Documents\keys\Certificates\cert006.pfx"
 $certPwd = ConvertTo-SecureString -String "12345" -Force -AsPlainText
+$certPwd = ConvertTo-SecureString -String "Q1w2e3r4t5" -Force -AsPlainText
+
 Export-PfxCertificate -Cert $cert -FilePath $filePath -Password $certPwd
 
 
