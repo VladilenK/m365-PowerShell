@@ -7,4 +7,5 @@ You should review scipt, understand it very well and test it in nonprod environm
 My Blog Articles on the subject
 - [Using PowerShell to manage SharePoint Online](https://vladilen.com/tag/powershell/)
 - [Using Microsoft Graph API with SharePoint](https://vladilen.com/tag/microsoft-graph-api/)
-- [SharePoint Governance](https://vladilen.com/tag/microsoft-365-governance/) 
+- [Microsoft 365 Governance](https://vladilen.com/tag/microsoft-365-governance/) 
+- [SharePoint](https://vladilen.com/category/software/sharepoint/) 
