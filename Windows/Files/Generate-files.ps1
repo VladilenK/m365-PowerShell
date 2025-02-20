@@ -1,6 +1,6 @@
 $timeStart = Get-Date
 0001..9999 | ForEach-Object {
-    $timestamp = Get-Date -Format "yyyy-MM-dd--hh-mm"
+    $timestamp = Get-Date -Format "yyyy-MM-dd--HH-mm"
     $location = "C:\Users\Vlad\Documents\many-small-documents-04"
     $title = "File-{0:0000}-Created-$timestamp.txt" -f $_
     $numberOfWords = Get-Random -Minimum 3 -Maximum 8

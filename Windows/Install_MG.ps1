@@ -3,6 +3,7 @@ Start-process "https://docs.microsoft.com/en-us/powershell/microsoftgraph/overvi
 
 Find-Module -Command 'get-mgusermessage'
 Find-Module -Command 'get-mggroup'
+Get-Module Microsoft.Graph -ListAvailable
 
 Find-Module -Name Microsoft.Graph
 
@@ -23,6 +24,7 @@ Install-Module -Force -Name Microsoft.Graph.Identity
 Install-Module -Force -Name Microsoft.Graph.Sites 
 Install-Module -Force -Name Microsoft.Graph.Reports
 Install-Module -Force -Name Microsoft.Graph.Groups
+Install-Module -Force -Name Microsoft.Graph.Applications
 
 Get-Module Microsoft.Graph.* -ListAvailable | ft name, Version, Path 
 
@@ -59,3 +61,4 @@ Get-Module Microsoft.Graph.Mail -ListAvailable | ft name, Version, Path
 ###########################################
 
 Get-command -Module Microsoft.Graph
+Get-command -Name Get-MgServicePrincipal

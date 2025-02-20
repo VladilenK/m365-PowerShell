@@ -11,7 +11,7 @@ Register-PnPAzureADApp -Interactive -ApplicationName $appName -Tenant $tenantId 
 
 # bulk
 01..06 | ForEach-Object {
-    # $timestamp = Get-Date -Format "yyyy-MM-dd--hh-mm"
+    # $timestamp = Get-Date -Format "yyyy-MM-dd--HH-mm"
     $appName = "KBA-ACS-App-{0:00}" -f $_
     Write-Host "Creating an app:" $appName -NoNewline
     Register-PnPAzureADApp -Interactive -ApplicationName $appName -Tenant $tenantId -CertificatePath $certPath -CertificatePassword $certPass -Username $adminUPN -GraphApplicationPermissions $graphScopes -SharePointApplicationPermissions $spoScopes 
