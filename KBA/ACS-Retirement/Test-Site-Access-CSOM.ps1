@@ -25,3 +25,5 @@ $web | fl Url, Title, Id, Exists, IsPropertyAvailable
 # REST
 $restLists = Invoke-PnPSPRestMethod -Connection $connectionSite -Url "/_api/web/lists?$select=Id,Title"
 $restLists.value | ft -a Id, Title
+
+

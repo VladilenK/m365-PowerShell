@@ -9,6 +9,8 @@ Get-Module -Name PnP.PowerShell -ListAvailable
 Find-Module PnP.PowerShell
 Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force 
 
+Update-Module -Name PnP.PowerShell
+
 Get-Module -ListAvailable | ? { $_.Name -like "*pnp*" }
 Get-Module -Name PnP.PowerShell 
 Get-Module -Name PnP.PowerShell -ListAvailable 

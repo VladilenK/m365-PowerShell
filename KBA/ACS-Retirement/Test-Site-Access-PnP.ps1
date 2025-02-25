@@ -1,3 +1,4 @@
+
 $siteUrl
 $appId
 $appSecret
@@ -12,6 +13,8 @@ $certThumbprint
 
 $connectionSite = Connect-PnPOnline -Url $siteUrl -ClientId $appId -Thumbprint $certThumbprint -Tenant $tenantId -ReturnConnection
 $connectionSite.Url
+
+Disconnect-PnPOnline
 
 # Actions
 

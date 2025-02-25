@@ -5,17 +5,18 @@ $headers | ft -a
 
 #################################
 # Audit logs
+$reportPath = "signIns" 
 $reportPath = "directoryAudits"
-$reportPath = "signIns"
 
-$apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" 
 $apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" + '?&$filter=signInEventTypes/any' + "(t: t ne 'interactiveUser')"      # "signIns"
 $apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" + '?&$filter=signInEventTypes/any' + "(t: t eq 'nonInteractiveUser')"   # "signIns"
+$apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" 
 $Data = Invoke-RestMethod -Headers $Headers -Uri $apiUrl -Method Get
+$Data.value.Count
 
 $Data.value | Format-List
 $timestamp = Get-Date -Format "yyyy-MM-dd--HH-mm"
-$Data.value | Export-Csv -Path "T:\code\PS\.data\ACS-audit\$reportPath-$timestamp.csv"
+$Data.value | Export-Csv -Path "T:\code\m365-PowerShell\.data\ACS-Audit\$reportPath-$timestamp.csv"
 
 
 
@@ -39,6 +40,11 @@ $Data.value | Select-Object -ExpandProperty authenticationDetails | Select-Objec
 $Data.value | Select-Object -ExpandProperty category | Sort-Object -Unique | Format-List
 $Data.value | Select-Object -ExpandProperty activityDisplayName | Sort-Object -Unique | Format-List
 $Data.value | Select-Object -ExpandProperty targetResources | Select-Object -ExpandProperty displayName | Sort-Object -Unique | Format-List
+$Data.value | Select-Object -ExpandProperty additionalDetails | Format-List
+$Data.value | Select-Object -ExpandProperty initiatedBy | Format-List
+$Data.value | Select-Object -ExpandProperty initiatedBy | Select-Object -ExpandProperty app | Format-List
+$Data.value | Select-Object -ExpandProperty initiatedBy | Select-Object -ExpandProperty app | Select-Object -ExpandProperty displayName | Sort-Object -Unique | Format-List
+$Data.value | ?{$_.initiatedBy.app.displayName} | Format-List
 
 $Data.value | ?{$_.activityDisplayName -eq "Add service principal"} | Format-List
 $Data.value | ?{$_.targetResources.DisplayName -like "KBA-ACS-App-01"} | Select-Object -First 3 | Format-List 

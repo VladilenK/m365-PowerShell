@@ -1,15 +1,16 @@
 DisConnect-PnPOnline 
-Connect-PnPOnline -Url $adminUrl -ClientId $ClientId -Tenant $tenantId -Interactive
-Connect-PnPOnline -Url $adminUrl -ClientId $ClientId -Tenant $tenantId -Thumbprint $certThumbprint 
+$connectionAdmin = Connect-PnPOnline -Url $adminUrl -ClientId $ClientId -Tenant $tenantId -Interactive
+$connectionAdmin = Connect-PnPOnline -Url $adminUrl -ClientId $ClientId -Tenant $tenantId -Thumbprint $certThumbprint 
+Write-Host $connectionAdmin.Url
 
-$tenant = Get-PnPTenant 
+$tenant = Get-PnPTenant -Connection $connectionAdmin
 $tenant.SiteOwnerManageLegacyServicePrincipalEnabled
 $tenant.LegacyAuthProtocolsEnabled
 $tenant.DisableCustomAppAuthentication
 $tenant | fl DisableCustomAppAuthentication
 
-Set-PnPTenant -DisableCustomAppAuthentication $false
-Set-PnPTenant -SiteOwnerManageLegacyServicePrincipalEnabled $true
+Set-PnPTenant -DisableCustomAppAuthentication $false  -Connection $connectionAdmin
+Set-PnPTenant -SiteOwnerManageLegacyServicePrincipalEnabled $true  -Connection $connectionAdmin
 
 $appId = "096fd951-7285-4e4f-9c1f-23a393556b19" # Client-app-with-Sites.Selected-dlg-02
 $appId = "cb06d91c-33c7-408d-b5e2-4b60c33f2c7e" # KBA-ACS-App-01
@@ -22,7 +23,7 @@ $appId = "faecd917-c657-4890-b6ea-1852acd697c1" # KBA-ACS-App-06
 $appId = "1ac8df5b-db63-4c4f-87b9-713495cfdda3" # KBA-ACS-App-07 
 $appId = "7887d358-ef05-49df-964c-4fe5f122c0ba" # KBA-ACS-App-08 
 $appId = "a2de88c7-d9b1-4958-94aa-8014f92d5ebf" # KBA-ACS-App-09 
-$app = Get-PnPAzureADApp -Identity $appId
+$app = Get-PnPAzureADApp -Identity $appId  -Connection $connectionAdmin
 $appDisplayname = $app.DisplayName; $appDisplayname
 $siteUrl = "https://s5dz3.sharepoint.com/sites/KBA-ACS-Site-01"
 $siteUrl = "https://s5dz3.sharepoint.com/sites/KBA-ACS-Site-02"
@@ -35,13 +36,17 @@ $siteUrl = "https://s5dz3.sharepoint.com/sites/KBA-ACS-Site-09"
 $siteUrl = "https://s5dz3.sharepoint.com/teams/TestTeam01"
 
 Grant-PnPAzureADAppSitePermission -AppId $appId -DisplayName $appDisplayname -Site $siteUrl -Permissions Read
-Get-PnPAzureADAppSitePermission -Site $siteUrl 
+Get-PnPAzureADAppSitePermission -Site $siteUrl  -Connection $connectionAdmin
 
 $permissions = Get-PnPAzureADAppSitePermission -Site $siteUrl 
 $permissions.Id
 
 Revoke-PnPAzureADAppSitePermission -Site $siteUrl -PermissionId $permissions.Id
 
-Get-PnPAzureACSPrincipal -Scope Site -IncludeSubsites 
-Get-PnPAzureACSPrincipal -Scope Tenant 
+Get-PnPAzureACSPrincipal -Scope Tenant  -Connection $connectionAdmin
+
+$connectionSite = Connect-PnPOnline -Url $siteUrl -ClientId $ClientId -Tenant $tenantId -Thumbprint $certThumbprint 
+$connectionSite.Url
+
+Get-PnPAzureACSPrincipal -Scope Site -IncludeSubsites -Connection $connectionSite
 
