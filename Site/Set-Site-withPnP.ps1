@@ -12,8 +12,9 @@ $siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01"
 $siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01/SubSite_01"
 $siteUrl = "https://$orgname.sharepoint.com/sites/Test-Sites-Selected"
 $siteUrl = "https://$orgname.sharepoint.com/teams/TestTeam_03"
+$siteUrl = "https://$orgname.sharepoint.com/sites/KBA-ACS-Site-01"
 
-$pnpTenantSite = Get-PnPTenantSite -Identity $siteUrl -Detailed -Connection $connection
+$pnpTenantSite = Get-PnPTenantSite -Connection $connection -Identity $siteUrl -Detailed
 $pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel, Owner | fl
 $pnpTenantSite
 
@@ -56,5 +57,10 @@ Enable-PnPFeature -Identity 41e1d4bf-b1a2-47f7-ab80-d5d6cbba3092   -Connection $
 # rename site
 Get-PnPTenantSite -Identity $siteUrl -Connection $connection | ft -a Title 
 Set-PnPTenantSite -Identity $siteUrl -Connection $connection -Title "TestTeam_03 [renamed]"
+
+##########################
+# sharing options
+$pnpTenantSite.SharingCapability
+Set-PnPTenantSite -Identity $pnpTenantSite -SharingCapability
 
 

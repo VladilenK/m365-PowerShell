@@ -59,3 +59,5 @@ Get-PnPSite -Connection $conn
 
 $sites = $sites | Where-Object { $_.Url -like "*vlad_*" }
 $sites.count
+
+$msalToken = Get-MsalToken -ClientId $clientid -Interactive -TenantId $tenantId -ForceRefresh
