@@ -36,7 +36,7 @@ Remove-PnPAzureADServicePrincipalAssignedAppRole -Principal $UserAssignedManaged
 
 
 # Sites.selected
-$siteUrl = "https://jvkdev.sharepoint.com/sites/Test101"
+$siteUrl = "https://contoso.sharepoint.com/sites/Test101"
 Get-PnPAzureADAppSitePermission -Site $siteUrl  -Connection $connectionAdmin
 
 $clientId = "7c30fc9e-198c-46bf-af87-b48650577182" # App id
