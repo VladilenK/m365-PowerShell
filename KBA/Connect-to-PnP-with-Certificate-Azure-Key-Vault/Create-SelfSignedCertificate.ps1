@@ -1,5 +1,5 @@
 ﻿$subj = "localhost"
-$friendlyName = "self-signed cert for auth"
+$friendlyName = "cert008 - self-signed cert for auth"
 $certStoreLocation = "Cert:\CurrentUser\My"
 $cert = New-SelfSignedCertificate -Subject $subj -CertStoreLocation $certStoreLocation -KeyExportPolicy Exportable -KeySpec Signature -FriendlyName $friendlyName -KeyUsage DigitalSignature
 $cert | fl
@@ -9,10 +9,10 @@ $cert.NotAfter
 $filePath = "$Home\code\certificates\"
 $filePath = "$Home\Documents\keys\Certificates\"
 $filePath = "$Home\OneDrive\archive\Documents\keys\Certificates\"
-$filePathCer = $filePath + "cert007.cer"
-$filePathPfx = $filePath + "cert007.pfx"
+$filePathCer = $filePath + "cert008.cer"
+$filePathPfx = $filePath + "cert008.pfx"
 Export-Certificate -Cert $cert -FilePath $filePathCer -Type CERT
-$certPwd = ConvertTo-SecureString -String "*****************" -Force -AsPlainText
+$certPwd = ConvertTo-SecureString -String "*******************" -Force -AsPlainText
 Export-PfxCertificate -Cert $cert -FilePath $filePathPfx -Password $certPwd
 
 # Manually (with GUI): 

@@ -1,6 +1,6 @@
 Get-Command *scop* -Module PnP.PowerShell
 
-$connection
+$connAdmin
 
 $siteUrl = "https://$orgname.sharepoint.com/teams/Test-Ext-02-Internal-Only-Policy"
 $siteUrl = "https://$orgname.sharepoint.com/teams/Test-Ext-01-None"
@@ -13,14 +13,15 @@ $siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01/SubSite_01"
 $siteUrl = "https://$orgname.sharepoint.com/sites/Test-Sites-Selected"
 $siteUrl = "https://$orgname.sharepoint.com/teams/TestTeam_03"
 $siteUrl = "https://$orgname.sharepoint.com/sites/KBA-ACS-Site-01"
+$siteUrl = "https://$orgname.sharepoint.com/sites/dev"
 
-$pnpTenantSite = Get-PnPTenantSite -Connection $connection -Identity $siteUrl -Detailed
+$pnpTenantSite = Get-PnPTenantSite -Connection $connAdmin -Identity $siteUrl -Detailed
 $pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel, Owner | fl
 $pnpTenantSite
 
-Set-PnPTenantSite -Identity $siteUrl -Connection $connection -DenyAddAndCustomizePages:$false
-Set-PnPTenantSite -Identity $siteUrl -Connection $connection -DenyAddAndCustomizePages:$true
-Set-PnPTenantSite -Identity $siteUrl -Connection $connection -Owners $adminUPN
+Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin -DenyAddAndCustomizePages:$false
+Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin -DenyAddAndCustomizePages:$true
+Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin -Owners $adminUPN
 
 # sensitivity label
 $pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel | fl
@@ -28,8 +29,8 @@ $Id1 = [GUID]("0f4b1e4f-9646-4748-b397-283325ce9f49") # Test Label 01
 $Id2 = [GUID]("737dde27-1b61-4232-b976-7ff1148da60c") # Internal-Only Site Group
 $Id3 = [GUID]("27b5d387-be3c-4c5d-b59c-f204385c2ff3") # External Access Enabled Site or Group
 
-Set-PnPTenantSite -Identity $siteUrl -Connection $connection  -RemoveLabel 
-Set-PnPTenantSite -Identity $siteUrl -Connection $connection -SensitivityLabel $id2
+Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin  -RemoveLabel 
+Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin -SensitivityLabel $id2
 
 $siteConnection = Connect-PnPOnline -Url $siteUrl -ClientId $clientID -Tenant $tenantId -Thumbprint $certThumbprint
 $siteConnection 
@@ -55,12 +56,13 @@ Enable-PnPFeature -Identity 41e1d4bf-b1a2-47f7-ab80-d5d6cbba3092   -Connection $
 
 
 # rename site
-Get-PnPTenantSite -Identity $siteUrl -Connection $connection | ft -a Title 
-Set-PnPTenantSite -Identity $siteUrl -Connection $connection -Title "TestTeam_03 [renamed]"
+Get-PnPTenantSite -Identity $siteUrl -Connection $connAdmin | ft -a Title 
+Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin -Title "TestTeam_03 [renamed]"
 
 ##########################
 # sharing options
 $pnpTenantSite.SharingCapability
 Set-PnPTenantSite -Identity $pnpTenantSite -SharingCapability
 
-
+# App catalog
+Add-PnPSiteCollectionAppCatalog -Site $siteUrl -Connection $connAdmin
