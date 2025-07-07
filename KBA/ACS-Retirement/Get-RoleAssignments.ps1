@@ -1,3 +1,6 @@
+#  retrieves site user's permissions 
+
+
 $siteUrl
 $connSite  = Connect-PnPOnline -Url $siteUrl -ClientId $clientid -ReturnConnection -Thumbprint $certThumbprint -Tenant $tenantId
 $connSite.Url
@@ -22,4 +25,6 @@ foreach ($ra in $roleAssignments) {
 $permissions | Format-Table -AutoSize
 
 Get-PnPWebPermission -Identity $web -PrincipalId 3 -Connection $connSite
+
+
 

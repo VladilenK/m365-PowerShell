@@ -12,6 +12,11 @@ $Data = Invoke-RestMethod -Headers $Headers -Uri $apiUrl -Method Get
 $Data.value.Count
 
 $Data.value | Format-List
+$Data.value | Format-Table -AutoSize
+
+# appCredentialSignInActivities
+$Data.value | Select-Object -Property appId, keyType, createdDateTime, expirationDateTime | Sort-Object expirationDateTime
+
 $timestamp = Get-Date -Format "yyyy-MM-dd--HH-mm"
 $Data.value | Export-Csv -Path "T:\code\m365-PowerShell\.data\ACS-Audit\$reportPath-$timestamp.csv"
 
