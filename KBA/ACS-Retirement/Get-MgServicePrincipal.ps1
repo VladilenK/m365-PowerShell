@@ -1,6 +1,7 @@
 #  
 Import-Module Microsoft.Graph
 
+DisConnect-MgGraph 
 Connect-MgGraph -Scopes "Application.Read.All"
 Get-MgContext
 
@@ -9,11 +10,18 @@ Get-MgServicePrincipal | ft DisplayName, AppId, ServicePrincipalType
 
 $servicePrincipals = Get-MgServicePrincipal -All
 $servicePrincipals.count
+$servicePrincipals[0].AppOwnerOrganizationId
 $servicePrincipals[0] | fl
 $servicePrincipals[-1] | fl
 
+$timestamp = Get-Date -Format "yyyy-MM-dd--HH-mm"
+$servicePrincipals | Export-Csv -Path "T:\code\m365-PowerShell\.data\ACS-Audit\ServicePrincipals-$timestamp.csv"
 
-$sp = $servicePrincipals | ?{ $_.AppDisplayName -eq 'KBA-ACS-App-04' }
+
+
+$servicePrincipals | ?{ $_.AppOwnerOrganizationId -eq $tenantid }
+$servicePrincipals | ?{ $_.id -eq '27a7bdef-db68-4204-ae80-37e0f1f5ccf8' }
+$sp = $servicePrincipals | ?{ $_.AppDisplayName -eq 'KBA-ACS-App-01' }
 $sp = $servicePrincipals | ?{ $_.AppDisplayName -eq 'KBA-ACS-App-01' }
 
 $sp = Get-MgServicePrincipal -ServicePrincipalId "387d91bc-0771-4b6b-a4d9-1c66242e045f" -Property Info, AppRoleAssignments, AppRoles, AppRoleAssignedTo, KeyCredentials, PasswordCredentials

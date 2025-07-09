@@ -3,9 +3,9 @@ $headers | ft -a
 
 # 
 
-$reportPath = "applicationSignInDetailedSummary"
-$reportPath = "servicePrincipalSignInActivities"
 $reportPath = "appCredentialSignInActivities"
+$reportPath = "servicePrincipalSignInActivities"
+$reportPath = "applicationSignInDetailedSummary"
 
 $apiUrl = "https://graph.microsoft.com/beta/reports/$reportPath"
 $Data = Invoke-RestMethod -Headers $Headers -Uri $apiUrl -Method Get
