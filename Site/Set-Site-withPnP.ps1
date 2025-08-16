@@ -13,11 +13,16 @@ $siteUrl = "https://$orgname.sharepoint.com/sites/TestCommSite_01/SubSite_01"
 $siteUrl = "https://$orgname.sharepoint.com/sites/Test-Sites-Selected"
 $siteUrl = "https://$orgname.sharepoint.com/teams/TestTeam_03"
 $siteUrl = "https://$orgname.sharepoint.com/sites/KBA-ACS-Site-01"
-$siteUrl = "https://$orgname.sharepoint.com/sites/dev"
+$siteUrl = "https://$orgname.sharepoint.com/sites/tst"
+$siteUrl = "https://$orgname.sharepoint.com/teams/Test-Broken-Team-Site"
 
-$pnpTenantSite = Get-PnPTenantSite -Connection $connAdmin -Identity $siteUrl -Detailed
+$pnpTenantSite = Get-PnPTenantSite -Connection $connectionAdmin -Identity $siteUrl -Detailed
+$pnpTenantSite | Select-Object Url, Template, IsTeamsConnected, GroupId, RelatedGroupId,  Owner | fl
+
 $pnpTenantSite | Select-Object Url, Template, DenyAddAndCustomizePages, SensitivityLabel, Owner | fl
-$pnpTenantSite
+
+
+
 
 Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin -DenyAddAndCustomizePages:$false
 Set-PnPTenantSite -Identity $siteUrl -Connection $connAdmin -DenyAddAndCustomizePages:$true
