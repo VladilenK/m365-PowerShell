@@ -2,12 +2,12 @@
 Start-process "https://docs.microsoft.com/en-us/powershell/microsoftgraph/overview?view=graph-powershell-1.0"
 
 $moduleName = "Microsoft.Graph.Beta.Sites"
-$moduleName = "Microsoft.Graph.Applications"
-$moduleName = "Microsoft.Graph.Authentication"
 $moduleName = "Microsoft.Graph.Sites"
 $moduleName = "Microsoft.Graph"
+$moduleName = "Microsoft.Graph.Applications"
+$moduleName = "Microsoft.Graph.Authentication"
 Get-Module -Name $moduleName -ListAvailable
-Find-Module -Name $moduleName 
+Find-Module -Name $moduleName | ft Version, Name, Repository, Description
 Update-Module -Name $moduleName 
 Install-Module -Force -Name $moduleName
 
