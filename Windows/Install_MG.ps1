@@ -6,10 +6,11 @@ $moduleName = "Microsoft.Graph.Sites"
 $moduleName = "Microsoft.Graph"
 $moduleName = "Microsoft.Graph.Applications"
 $moduleName = "Microsoft.Graph.Authentication"
+$moduleName = "Microsoft.Graph.Groups"
 Get-Module -Name $moduleName -ListAvailable
 Find-Module -Name $moduleName | ft Version, Name, Repository, Description
 Update-Module -Name $moduleName 
-Install-Module -Force -Name $moduleName
+Install-Module -Force -Name $moduleName 
 
 
 

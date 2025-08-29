@@ -2,6 +2,7 @@
 # Get-PnPContext
 # Get-PnPConnection
 
+
 $groups = Get-PnPMicrosoft365Group
 $groups.count
 $groups[1000]
