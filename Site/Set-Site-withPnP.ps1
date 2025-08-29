@@ -71,3 +71,7 @@ Set-PnPTenantSite -Identity $pnpTenantSite -SharingCapability
 
 # App catalog
 Add-PnPSiteCollectionAppCatalog -Site $siteUrl -Connection $connAdmin
+
+
+
+
