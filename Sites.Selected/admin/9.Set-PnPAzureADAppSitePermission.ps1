@@ -16,7 +16,7 @@ $appId = "" #
 $app = Get-PnPAzureADApp -Identity $appId  -Connection $connectionAdmin
 $appDisplayname = $app.DisplayName; $appDisplayname
 
-$siteUrl = "https://s5dz3.sharepoint.com/teams/TestTeam01"
+$siteUrl = "https://$orgname.sharepoint.com/teams/TestTeam01"
 
 Grant-PnPAzureADAppSitePermission -AppId $appId -DisplayName $appDisplayname -Site $siteUrl -Permissions Read
 Get-PnPAzureADAppSitePermission -Site $siteUrl  -Connection $connectionAdmin

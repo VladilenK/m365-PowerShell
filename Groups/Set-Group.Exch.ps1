@@ -27,7 +27,7 @@ Set-UnifiedGroup -Identity $groupId -UnifiedGroupWelcomeMessageEnabled:$false # 
 Set-UnifiedGroup -Identity $groupId -UnifiedGroupWelcomeMessageEnabled
 
 
-
+set-emailaddresspolicy 
 
 
 
