@@ -27,13 +27,14 @@ $UserProp["SID"]
 # 2 Value : i:0h.f|membership|100320050f7c5c71@live.com
 
 
+$siteUrl = "https://$orgname.sharepoint.com/teams/UserIDMismatchTest03"
 $siteUrl = "https://$orgname.sharepoint.com/teams/UserIDMismatchTest01"
 $siteUrl = "https://$orgname.sharepoint.com/sites/UserIDMismatchTest02"
-$siteUrl = "https://$orgname.sharepoint.com/teams/UserIDMismatchTest03"
 
 $connectionToSite = Connect-PnPOnline -ReturnConnection -Url $siteUrl -ClientId $ClientId -Thumbprint $Thumbprint -Tenant $tenantId
 $connectionToSite.Url
 
+Get-PnPGroup -Connection $connectionToSite 
 Get-PnPUser -Connection $connectionToSite 
 $siteUser = Get-PnPUser -Connection $connectionToSite -Identity ("i:0#.f|membership|$upn") -Includes AadObjectId
 $siteUser | fl
@@ -85,4 +86,34 @@ $m365Group
 Get-PnPMicrosoft365GroupMember -Connection $connectionToSite -Identity $m365Group 
 Remove-PnPMicrosoft365GroupMember -Connection $connectionToSite -Identity $m365Group -Users $upn
 Add-PnPMicrosoft365GroupMember -Connection $connectionToSite -Identity $m365Group -Users $upn
+
+#############################################
+# look at the Access requests list
+Get-PnPList -Connection $connectionToSite 
+$accessRequestList = Get-PnPList -Connection $connectionToSite -Identity "Access Requests"
+$accessRequestList
+
+$accessRequests = Get-PnPListItem -Connection $connectionToSite -List $accessRequestList 
+$accessRequests.count
+
+$accessRequests[-1] | fl
+$accessRequests[-1].FieldValues | fl
+$accessRequests[-1].FieldValues["Author"] | fl
+$accessRequests[0].FieldValues["ReqByUser"] | fl
+$accessRequests[-1].FieldValues["ReqByUser"] | fl
+$accessRequests[-1].FieldValues["ReqByUser"] | fl
+$accessRequests[0].FieldValues["PermissionLevelRequested"] | fl
+
+$requests = $accessRequests | Sort-Object Id -Descending | Select-Object FieldValues 
+$monthAgo = (Get-Date).AddMonths(-2)
+foreach ($request in $requests) {
+    if ($request.FieldValues["RequestDate"] -gt $monthAgo) {
+        if ($request.FieldValues["ReqForUser"].Email -eq $userEmail) {
+            break
+        }
+    }
+
+}
+
+$request.FieldValues
 

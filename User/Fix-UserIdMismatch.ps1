@@ -9,8 +9,8 @@
 $userEmail = "John.Smith.qerdgfq@$orgname.onmicrosoft.com"
 $userEmail = "John.Smith@$orgname.onmicrosoft.com"
 $siteUrl = "https://$orgname.sharepoint.com/teams/UserIDMismatchTest01"
-$siteUrl = "https://$orgname.sharepoint.com/sites/UserIDMismatchTest02"
 $siteUrl = "https://$orgname.sharepoint.com/teams/UserIDMismatchTest03"
+$siteUrl = "https://$orgname.sharepoint.com/sites/UserIDMismatchTest02"
 
 # end of parameters section
 # 
