@@ -5,6 +5,8 @@ $sourcePath = "D:\_Photos.All"   # original "do no touch" files
 $sourcePath = "D:\_Scan_Sorted"   # original "do no touch" files
 $sourcePath = "D:\_Videos_original"   # original "do no touch" files
 $sourcePath = "D:\_Photos_Upl_FB"   # original "do no touch" files
+$sourcePath = "M:\V"   # original "do no touch" files
+$sourcePath = "M:\_Photos"   # original "do no touch" files
 
 # $deduplPath = "U:\_Photos.bak.2" # files to clean-up - remove duplications
 $deduplPath = "D:\_Photos.All" # files to clean-up - remove duplications
@@ -12,6 +14,9 @@ $deduplPath = "D:\_Scan" # files to clean-up - remove duplications
 $deduplPath = "D:\_Videos.mix" # files to clean-up - remove duplications
 $deduplPath = "D:\_Photos.bak.2" # files to clean-up - remove duplications
 $deduplPath = "D:\_Photos" # files to clean-up - remove duplications
+$deduplPath = "T:\" # files to clean-up - remove duplications
+$deduplPath = "M:\_Photos.All" # files to clean-up - remove duplications - M 603GB free
+
 
 Write-Host "Source files count, GB"
 $sourceFiles = Get-ChildItem -Path $sourcePath -Recurse -Attributes !Directory # -Include "*.mov"

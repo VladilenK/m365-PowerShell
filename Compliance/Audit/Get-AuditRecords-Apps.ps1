@@ -14,3 +14,15 @@ $results | select -Last 10 | ft -a CreationDate, Operations, RecordType, UserIds
 
 $results = Search-UnifiedAuditLog -StartDate $start -EndDate $end -ResultSize $resultSize 
 $results.Count
+
+
+# specific user
+[DateTime]$start = [DateTime]::UtcNow.AddMonths(-1)
+[DateTime]$end = [DateTime]::UtcNow
+$resultSize = 100
+$recordType = 'SharePoint'
+$userId = "User@domain.com"
+
+$results = Search-UnifiedAuditLog -StartDate $start -EndDate $end -ResultSize $resultSize -RecordType $recordType -UserIds $userId
+$results.count
+

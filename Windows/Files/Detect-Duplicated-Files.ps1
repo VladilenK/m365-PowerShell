@@ -7,6 +7,7 @@ $sourcePath = "U:\_Photos"   # original "do no touch" files
 $sourcePath = "M:\DVR\DVR4-Voifo"   # original "do no touch" files
 $sourcePath = "D:\_Videos.mix"   # original "do no touch" files
 $sourcePath = "D:\"   # original "do no touch" files
+$sourcePath = "U:\M"   # original "do no touch" files
 
 Write-Host "Source files in $sourcePath : count, GB"
 $allSourceFiles = Get-ChildItem -Path $sourcePath -Recurse -Attributes !Directory # -Include "*.mov"
@@ -31,6 +32,9 @@ $duplicatedGroups.Count
 
 Write-Host "Found duplicated files:"
 $duplicatedFiles = $duplicatedGroups | foreach { $_.Group | select Path } 
+$duplicatedFiles[0]
+$duplicatedFiles = $duplicatedFiles | Sort-Object -Property Path
+$duplicatedFiles | %{$_.Path.split("\")[2] + "\" + $_.Path.split("\")[3]} | Sort-Object -Unique
 $duplicatedFiles.Count
 
 
