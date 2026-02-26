@@ -3,7 +3,7 @@ Get-ChildItem -Path "Cert:\CurrentUser\My" | ft NotAfter, Subject, FriendlyName,
 Get-ChildItem -Path "Cert:\CurrentUser\My" | ft Thumbprint, Subject, FriendlyName   -a 
 
 
-$certname = "Cert003"
+$certname = "Cert2026"
 $cert = Get-ChildItem -Path "Cert:\CurrentUser\My" | Where-Object { $_.FriendlyName -eq $certname } ; $cert.FriendlyName
 # $cert = Get-ChildItem -Path "Cert:\CurrentUser\My" | Where-Object { $_.Subject -eq "CN=$certname" }
 #$cert = Get-ChildItem -Path "Cert:\LocalMachine\My" | Where-Object {$_.FriendlyName -eq $certname}

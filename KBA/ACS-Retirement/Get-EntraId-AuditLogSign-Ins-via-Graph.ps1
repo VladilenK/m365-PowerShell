@@ -9,18 +9,22 @@ $reportPath = "signIns"
 #  includes user sign-in events
 
 
-$apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" + '?&$filter=signInEventTypes/any' + "(t: t eq 'nonInteractiveUser')"   # "signIns"
-$apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" + '?&$filter=signInEventTypes/any' + "(t: t ne 'interactiveUser')"      # "signIns"
 $apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" 
+# $apiUrl = "https://graph.microsoft.com/beta/auditLogs/$reportPath" + '?$filter=' + "signInEventTypes/any(t:t eq 'servicePrincipal')" + " and appId eq 'cb06d91c-33c7-408d-b5e2-4b60c33f2c7e'"
+$apiUrl += '?$filter=' + "signInEventTypes/any(t:t eq 'servicePrincipal')"
+$apiUrl += " and appId eq 'cb06d91c-33c7-408d-b5e2-4b60c33f2c7e'"
+$apiUrl += " and createdDateTime ge 2026-02-16T00:00:00Z"
 $Data = Invoke-RestMethod -Headers $Headers -Uri $apiUrl -Method Get
 $Data.value.Count
 
 # $Data.value | Format-List
 $timestamp = Get-Date -Format "yyyy-MM-dd--HH-mm"
-$Data.value | Export-Csv -Path "T:\code\m365-PowerShell\.data\ACS-Audit\$reportPath-$timestamp.csv"
+$Data.value | Export-Csv -Path "$home\code\m365-PowerShell\.data\ACS-Audit\$reportPath-$timestamp.csv"
 
 $Data.value | Format-List | clip
+$Data.value | Select-Object -Property appId, appDisplayName, createdDateTime, status | Format-List | clip
 $Data.value[0] | Format-List 
+$Data.value[0].status.additionalDetails | Format-List 
 $Data.value[-1] | Format-List 
 
 $Data.value | ?{$_.clientAppUsed -ne "Browser"} | Select-Object -First 1 | Format-List

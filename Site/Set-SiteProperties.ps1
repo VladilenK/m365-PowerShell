@@ -18,9 +18,12 @@ $siteUrl = "https://$orgname.sharepoint.com/sites/Test-Official-Site-01" # SiteC
 $siteUrl = "https://$orgname.sharepoint.com/teams/Test01"                # SiteCustomSubject: Test5 Test10; SiteSearchClassification: Included
 $siteUrl = "https://$orgname.sharepoint.com/teams/Test-Retention-001"    # SiteCustomSubject: TestRetention; SiteSearchClassification: Included
 $siteUrl = "https://$orgname.sharepoint.com/teams/Test-Parallel-1500"    # SiteCustomSubject: TestRetention; SiteSearchClassification: Included
-$connectionSite = Connect-PnPOnline -Url $siteUrl -ClientId $clientid -ClientSecret $clientSc -ReturnConnection; $connectionSite.Url
-Get-PnPPropertyBag -Connection $connectionSite -Key "SiteSearchClassification" # RefinableString08 aka SiteSearchClassification
+
+$connectionSite = Connect-PnPOnline -ReturnConnection -Url $siteUrl -ClientId $clientid -Tenant $tenantId -Thumbprint $thumbprint
+$connectionSite.Url
+# Get-PnPPropertyBag -Connection $connectionSite -Key "SiteSearchClassification" # RefinableString08 aka SiteSearchClassification
 Get-PnPPropertyBag -Connection $connectionSite -Key "SiteCustomSubject" # RefinableString09 aka SiteCustomSubject
+Get-PnPPropertyBag -Connection $connectionSite -Key "SiteCustomProperty" # RefinableString09 aka SiteCustomSubject
 
 $tenantSite = Get-PnPTenantSite -Identity $siteUrl -Connection $connectionAdmin -Detailed
 $tenantSite | Select-Object Url, Title, DenyAddAndCustomizePages
@@ -30,9 +33,8 @@ Set-PnPTenantSite -Connection $connectionAdmin -Identity $siteUrl -DenyAddAndCus
 Get-pnpsite -Connection $connectionSite
 Set-PnPAdaptiveScopeProperty -Key "IsOfficial" -Value "No" -Connection $connectionSite
 Set-PnPAdaptiveScopeProperty -Key "SiteSearchClassification" -Value "Included" -Connection $connectionSite
-Set-PnPAdaptiveScopeProperty -Key "SiteCustomSubject" -Value "TestRetention" -Connection $connectionSite
+Set-PnPAdaptiveScopeProperty -Key "SiteCustomProperty" -Value "TestSite" -Connection $connectionSite
 Request-PnPReIndexWeb -Connection $connectionSite 
-
 
 
 # test User-level
@@ -41,6 +43,7 @@ Get-PnPPropertyBag -Key "SiteCustomSubject"  -Connection $connection # Refinable
 Set-PnPAdaptiveScopeProperty -Key "SiteCustomSubject" -Value "Test Test4" -Connection $connection
 Set-PnPPropertyBagValue -Key "SiteCustomSubject" -Value "Test10 Test5" -Indexed:$true -Connection $connection
 
+Set-PnPPropertyBagValue -Key "SiteCustomSubject" -Value "Test" -Indexed:$true -Connection $connectionSite
 Set-PnPPropertyBagValue -Key "SiteCustomSubject" -Value "Birding" -Indexed:$true -Connection $connectionSite
 Set-PnPPropertyBagValue -Key "SiteCustomSubject" -Value "News" -Indexed:$true -Connection $connectionSite
 Set-PnPPropertyBagValue -Key "SiteCustomSubject" -Value "Test Test5 Test10" -Indexed:$true -Connection $connectionSite

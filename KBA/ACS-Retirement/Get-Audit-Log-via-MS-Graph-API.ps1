@@ -14,7 +14,7 @@ $Data.value.Count
 
 $Data.value | Format-List
 $timestamp = Get-Date -Format "yyyy-MM-dd--HH-mm"
-$Data.value | Export-Csv -Path "T:\code\m365-PowerShell\.data\ACS-Audit\$reportPath-$timestamp.csv"
+$Data.value | Export-Csv -Path "$home\code\m365-PowerShell\.data\ACS-Audit\$reportPath-$timestamp.csv"
 
 
 $Data.value | Format-List | clip

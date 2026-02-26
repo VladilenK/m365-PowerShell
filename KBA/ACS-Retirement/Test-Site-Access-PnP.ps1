@@ -39,3 +39,8 @@ $item.FieldValues.FileRef
 $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm"; $timestamp
 
 
+$fileUrl = $item.FieldValues.FileRef
+$filename = $item.FieldValues.FileLeafRef
+Get-PnPFile -Connection $connectionSite -Url $fileUrl -Path "t:\" -FileName $filename -AsFile -Force
+
+
