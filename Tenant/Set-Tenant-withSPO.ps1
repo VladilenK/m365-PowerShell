@@ -1,6 +1,6 @@
 ﻿# PowerShell 5
 
-$adminUrl = "https://s5dz3-admin.sharepoint.com"
+$adminUrl = ""
 
 Connect-SPOService -Url $adminUrl -ModernAuth:$true 
 Get-SPOTenant 
