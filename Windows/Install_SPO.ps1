@@ -4,7 +4,8 @@ Get-InstalledModule -Name Microsoft.Online.SharePoint.PowerShell
 Get-Module Microsoft.Online.SharePoint.PowerShell | ft -a
 Get-Module Microsoft.Online.SharePoint.PowerShell -ListAvailable | ft -a
 Find-Module Microsoft.Online.SharePoint.PowerShell | ft -a
-Install-Module Microsoft.Online.SharePoint.PowerShell -Force 
+Install-Module Microsoft.Online.SharePoint.PowerShell -Scope CurrentUser
+
 
 Remove-Module Microsoft.Online.SharePoint.PowerShell 
 Import-Module Microsoft.Online.SharePoint.PowerShell
@@ -19,7 +20,7 @@ Find-Module Microsoft.Online.SharePoint.PowerShell | ft -a
 Uninstall-Module -Name Microsoft.Online.SharePoint.PowerShell -AllVersions
 Uninstall-Module -Name Microsoft.Online.SharePoint.PowerShell -RequiredVersion 16.0.8525.1200
 
-#Update-Module -Name Microsoft.Online.SharePoint.PowerShell
+Update-Module -Name Microsoft.Online.SharePoint.PowerShell
 
 Get-Command -Module Microsoft.Online.SharePoint.PowerShell
 Get-Command -Module Microsoft.Online.SharePoint.PowerShell *templ*
@@ -71,5 +72,4 @@ Get-PSRepository
 # (1) Navigate to C:\Windows\Microsoft.NET\assembly\GAC_MSIL
 # (2) Remove the Microsoft.SharePoint.Client* assemblies
 # (3) Uninstall the module with Uninstall-Module -Name Microsoft.Online.SharePoint.PowerShell
-
 

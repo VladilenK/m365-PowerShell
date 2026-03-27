@@ -1,5 +1,7 @@
 ﻿# PowerShell 5
 
+$adminUrl = "https://s5dz3-admin.sharepoint.com"
+
 Connect-SPOService -Url $adminUrl -ModernAuth:$true 
 Get-SPOTenant 
 
@@ -68,4 +70,28 @@ Set-SPOBuiltInSiteTemplateSettings -Identity '00000000-0000-0000-0000-0000000000
 
 Get-Command *OrgNews*
 Get-Command *ttemp*
+
+
+
+
+#########
+# CSP
+
+$tenant = Get-SPOTenant
+$tenant.ContentSecurityPolicyEnforcement
+$tenant.DelayContentSecurityPolicyEnforcement
+$tenant.ResyncContentSecurityPolicyConfigurationEntries
+
+
+Set-SPOTenant -ContentSecurityPolicyEnforcement $true
+Set-SPOTenant 
+
+# List current sources
+Get-SPOContentSecurityPolicy
+
+# Remove a source
+Remove-SPOContentSecurityPolicy -Source "https://cdn.host.com/source/"
+
+# Add a source
+Add-SPOContentSecurityPolicy -Source "https://karassev.com/source/"
 
