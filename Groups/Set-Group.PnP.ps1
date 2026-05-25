@@ -13,14 +13,25 @@ $groupId = 'a738c357-0b80-427c-9dbd-77b505aa1ea6'  # TestPrivteam-ownerlessgroup
 $groupId = 'a1a667f7-1433-401c-b384-0b34dc2fd680'  # 603
 $groupId = '92d1bceb-33d4-4db2-afce-6495d461a92e'  # 604
 $groupId = '80e65035-e6e7-45c3-8fa6-b412bdf11e97'  # 605
+$groupId = 'bf1f5165-1684-4a10-8d0e-9598eb7edf63'  # ExamTest-group1
+$groupId = 'f40570c3-9209-492a-9a71-f411cc6cc9d9'  # ExamTest-group2
 
-$group = Get-PnPMicrosoft365Group -IncludeSiteUrl -IncludeOwners -Identity $groupId
+$group = Get-PnPMicrosoft365Group -Connection $connectionAdmin -IncludeSiteUrl -IncludeOwners -Identity $groupId
 $group | Select-Object MailNickname, CreatedDateTime, RenewedDateTime, HideFromAddressLists, AllowToAddGuests
+$group | Select-Object MailNickname, SecurityEnabled
+$group
+
+Set-PnPMicrosoft365Group -Identity $groupId -Connection $connectionAdmin 
+
+$groupSettings = Get-PnPMicrosoft365GroupSettings -Identity $groupId -Connection $connectionAdmin
+$groupSettings
+Set-PnPMicrosoft365GroupSettings -Identity $groupId -Connection $connectionAdmin -Values
+
 
 Reset-PnPMicrosoft365GroupExpiration -Identity $groupId 
 
 $group.RenewedDateTime = $((Get-Date).AddDays(-90))
-$group.RenewedDateTime
+$group.RenewedDateTime.Date
 Invoke-PnPQuery 
 
 Set-PnPMicrosoft365Group -Identity $groupId -HideFromAddressLists $true
