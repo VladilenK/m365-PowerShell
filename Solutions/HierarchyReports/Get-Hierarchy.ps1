@@ -93,14 +93,13 @@ $headers["Authorization"].Substring(0, 20) + "..." # show the first 20 character
 $upn = "miriamg@$orgname.onmicrosoft.com"
 $upn = "pattif@$orgname.onmicrosoft.com"
 
-
-
 $user = Get-User -upn $upn
 $directReports = Get-DirectReports -upn $upn
 $directReports.count
 
 $allReports = Get-AllReports -upn $upn -includeLeader $true -level 3
-$allReports = Get-AllReports -upn $upn 
+$allReports = Get-AllReports -upn $upn -level 5
+$allReports = Get-AllReports -upn $upn -includeLeader $true
 $allReports.count
 $allReports | Sort-Object Level | ft -AutoSize displayName, userPrincipalNamem, accountEnabled, Level, Manager
 
