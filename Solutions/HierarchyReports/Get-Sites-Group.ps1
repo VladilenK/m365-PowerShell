@@ -1,4 +1,4 @@
-# this script is used to get all the sites in the tenant owned by someone from the hierarchy
+# this script is used to get all the group-based sites in the tenant owned by someone from the hierarchy
 # assume we have the hierarchy of direct reports for a given user ("$allReports" list from Get-Hierarchy.ps1) 
 #  
 
